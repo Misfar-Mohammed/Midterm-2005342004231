@@ -1,24 +1,19 @@
 {
-  "name": "midterm-books-api",
+  "name": "rentease-api",
   "version": "1.0.0",
-  "description": "Midterm REST API - Library Books Management",
+  "description": "RentEase - Vehicle Rental Marketplace REST API | Midterm Project | Rahumathulla Misfar Mohammed - 2005342004231",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "keywords": [
-    "express",
-    "rest-api",
-    "library"
-  ],
   "author": "Rahumathulla Misfar Mohammed - 2005342004231",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.0.0",
-    "serverless-http": "^4.0.0"
+    "express": "^5.1.0",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.9"
   }
 }

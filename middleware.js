@@ -1,71 +1,71 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// middleware.js
-// Contains: logger, requireAuth, notFound, errorHandler
+// middleware.js  —  RentEase Middleware
+//
+// Exports: logger, requireAuth, notFound, errorHandler
+//
+// WHY THIS ORDER IN index.js (will be asked in Q&A):
+//   1. express.json()  → parses JSON body before any route reads it
+//   2. logger          → logs every request (must run before routes)
+//   3. Routes          → handle the actual business logic
+//   4. notFound        → catches any URL that matched no route (must be AFTER routes)
+//   5. errorHandler    → handles all errors passed via next(err) or throw
+//                        MUST have exactly 4 parameters so Express recognises it
 // ─────────────────────────────────────────────────────────────────────────────
 
-// AUTH TOKEN — in real production this would be in an .env file
-const AUTH_TOKEN = "mysecrettoken123";
+const AUTH_TOKEN = "Bearer rentease-secret-2024";   // token for protected routes
 
-// ── 1. Logger ─────────────────────────────────────────────────────────────────
-// Runs on every request; prints method, URL, and timestamp
+// ── 1. Logger: runs on every request ─────────────────────────────────────────
 function logger(req, res, next) {
-  const time = new Date().toISOString();
-  console.log(`[${time}] ${req.method} ${req.url}`);
-  next(); // must call next() to pass control to the next middleware
+  const now = new Date().toISOString();
+  console.log(`[${now}] ${req.method} ${req.url}`);
+  next();
 }
 
-// ── 2. requireAuth ────────────────────────────────────────────────────────────
-// Protects DELETE routes — checks for the Authorization header token
+// ── 2. requireAuth: protects DELETE routes ────────────────────────────────────
 function requireAuth(req, res, next) {
-  const authHeader = req.headers["authorization"]; // e.g. "Bearer mysecrettoken123"
-
-  // Check header exists and matches expected token
-  if (!authHeader || authHeader !== `Bearer ${AUTH_TOKEN}`) {
-    // Create an error object and pass it to the error handler
-    const err = new Error("Unauthorized: missing or invalid token");
-    err.status = 401;
-    return next(err);
-  }
-
-  next(); // token is valid, continue
-}
-
-// ── 3. notFound ───────────────────────────────────────────────────────────────
-// 404 handler — catches any URL that did not match a route above
-function notFound(req, res, next) {
-  const err = new Error(`Not Found: ${req.method} ${req.url}`);
-  err.status = 404;
-  next(err); // pass to the error handler below
-}
-
-// ── 4. errorHandler ───────────────────────────────────────────────────────────
-// 4-parameter error handler — MUST be placed LAST in index.js
-// Express recognises it as an error handler because it has 4 parameters (err, req, res, next)
-function errorHandler(err, req, res, next) {
-  // express.json() throws a SyntaxError when the request body is malformed JSON.
-  // We catch it here and return a friendly 400 instead of crashing.
-  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
-    return res.status(400).json({
+  const authHeader = req.headers["authorization"];
+  if (!authHeader || authHeader !== AUTH_TOKEN) {
+    return res.status(401).json({
       success: false,
-      error: {
-        status: 400,
-        message: "Invalid JSON: the request body could not be parsed",
-      },
+      error:   "Unauthorized",
+      message: `Missing or invalid token. Add header: Authorization: ${AUTH_TOKEN}`,
     });
   }
+  next();
+}
 
-  const statusCode = err.status || 500;
-
-  // ── Custom unified error format (bonus +2) ─────────────────────────────────
-  res.status(statusCode).json({
+// ── 3. notFound: 404 for unknown URLs — placed AFTER all routes ───────────────
+function notFound(req, res) {
+  res.status(404).json({
     success: false,
-    error: {
-      status: statusCode,
-      message: err.message || "Internal Server Error",
-    },
+    error:   "Not Found",
+    message: `Route ${req.method} ${req.url} does not exist on RentEase API`,
+    hint:    "Visit GET / for a list of all available endpoints",
   });
 }
 
-// Export all middleware so index.js and routes can import them
-module.exports = { logger, requireAuth, notFound, errorHandler };
+// ── 4. errorHandler: 4-param error handler — MUST be last in index.js ─────────
+// Express identifies this as an error handler because of the 4th parameter (next)
+// Handles errors thrown with throw or passed via next(err)
+function errorHandler(err, req, res, next) {   // eslint-disable-line no-unused-vars
+  // Handle malformed JSON body (SyntaxError from express.json())
+  if (err instanceof SyntaxError && err.status === 400) {
+    return res.status(400).json({
+      success: false,
+      error:   "Bad Request",
+      message: "Malformed JSON body — check your request body syntax",
+    });
+  }
 
+  const status  = err.status || 500;
+  const message = err.message || "Internal Server Error";
+
+  // Unified error format used consistently across all error responses (BONUS +2)
+  res.status(status).json({
+    success: false,
+    error:   status === 404 ? "Not Found" : status === 400 ? "Bad Request" : "Server Error",
+    message,
+  });
+}
+
+module.exports = { logger, requireAuth, notFound, errorHandler };
