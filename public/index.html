@@ -1,627 +1,1167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RentEase — Your Journey, Your Choice</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --bg:       #0a0d14;
-      --bg2:      #111827;
-      --bg3:      #1f2937;
-      --bg4:      #374151;
-      --border:   #374151;
-      --accent:   #6366f1;
-      --accent2:  #818cf8;
-      --green:    #10b981;
-      --red:      #ef4444;
-      --yellow:   #f59e0b;
-      --text:     #f9fafb;
-      --text2:    #9ca3af;
-      --text3:    #6b7280;
-      --radius:   14px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RentEase — Your Journey, Your Choice</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563eb;--blue2:#1d4ed8;--blue-light:#eff6ff;--blue-mid:#bfdbfe;
+  --green:#16a34a;--green-light:#dcfce7;
+  --yellow:#d97706;--yellow-light:#fef3c7;
+  --red:#dc2626;--red-light:#fee2e2;
+  --purple:#7c3aed;--purple-light:#ede9fe;
+  --orange:#ea580c;--orange-light:#ffedd5;
+  --gray:#64748b;--gray2:#94a3b8;--gray3:#cbd5e1;--gray4:#e2e8f0;--gray5:#f1f5f9;--gray6:#f8fafc;
+  --text:#0f172a;--text2:#334155;--text3:#64748b;
+  --white:#ffffff;--border:#e2e8f0;--shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);
+  --shadow-lg:0 10px 15px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.05);
+  --radius:10px;--radius-lg:14px;--radius-xl:18px;
+}
+body{font-family:'Inter',sans-serif;background:var(--gray6);color:var(--text);min-height:100vh}
+a{text-decoration:none;color:inherit}
 
-    /* ── NAV ── */
-    nav{
-      background:rgba(17,24,39,0.95);
-      border-bottom:1px solid var(--border);
-      padding:0 28px;height:66px;
-      display:flex;align-items:center;justify-content:space-between;
-      position:sticky;top:0;z-index:200;
-      backdrop-filter:blur(12px);
-    }
-    .nav-brand{display:flex;align-items:center;gap:10px}
-    .nav-logo{
-      background:linear-gradient(135deg,#6366f1,#8b5cf6);
-      border-radius:10px;width:36px;height:36px;
-      display:flex;align-items:center;justify-content:center;font-size:1.1rem;
-    }
-    .nav-title{font-weight:800;font-size:1.15rem;letter-spacing:-0.02em}
-    .nav-tagline{font-size:0.75rem;color:var(--text2);margin-left:4px}
-    .nav-badge{
-      background:var(--bg3);border:1px solid var(--border);
-      border-radius:20px;padding:6px 14px;font-size:0.76rem;color:var(--text2);
-    }
-    .nav-badge strong{color:var(--accent2)}
+/* ── UTILITY ── */
+.hidden{display:none!important}
+.flex{display:flex}.items-center{align-items:center}.justify-between{justify-content:space-between}.gap-2{gap:8px}.gap-3{gap:12px}.gap-4{gap:16px}
+.text-sm{font-size:.85rem}.text-xs{font-size:.75rem}.text-lg{font-size:1.1rem}.text-xl{font-size:1.3rem}.text-2xl{font-size:1.6rem}.text-3xl{font-size:2rem}.text-4xl{font-size:2.6rem}
+.font-bold{font-weight:700}.font-semibold{font-weight:600}.font-medium{font-weight:500}.font-black{font-weight:900}
+.text-blue{color:var(--blue)}.text-gray{color:var(--text3)}.text-white{color:#fff}
+.bg-blue{background:var(--blue)}.bg-white{background:#fff}
+.w-full{width:100%}.mt-1{margin-top:4px}.mt-2{margin-top:8px}.mt-3{margin-top:12px}.mt-4{margin-top:16px}
+.mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.mb-4{margin-bottom:16px}
+.p-2{padding:8px}.p-3{padding:12px}.p-4{padding:16px}.p-6{padding:24px}
+.rounded{border-radius:var(--radius)}.rounded-lg{border-radius:var(--radius-lg)}.rounded-full{border-radius:999px}
+.border{border:1px solid var(--border)}.shadow{box-shadow:var(--shadow)}.shadow-md{box-shadow:var(--shadow-md)}
+.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+input,select,textarea{font-family:'Inter',sans-serif}
 
-    /* ── HERO ── */
-    .hero{
-      background:radial-gradient(ellipse at 50% 0%,#6366f115 0%,transparent 70%);
-      border-bottom:1px solid var(--border);
-      padding:56px 28px 40px;text-align:center;
-    }
-    .hero-eyebrow{
-      display:inline-flex;align-items:center;gap:6px;
-      background:var(--bg3);border:1px solid var(--border);
-      border-radius:20px;padding:5px 14px;font-size:0.76rem;color:var(--accent2);
-      margin-bottom:18px;
-    }
-    .hero h1{font-size:2.6rem;font-weight:900;line-height:1.15;margin-bottom:10px;letter-spacing:-0.03em}
-    .hero h1 span{background:linear-gradient(90deg,#6366f1,#a78bfa,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .hero-sub{color:var(--text2);font-size:1rem;margin-bottom:28px}
-    .stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-    .stat{
-      background:var(--bg2);border:1px solid var(--border);
-      border-radius:12px;padding:16px 24px;min-width:110px;text-align:center;
-      transition:border-color 0.2s,transform 0.2s;
-    }
-    .stat:hover{border-color:var(--accent);transform:translateY(-2px)}
-    .stat-num{font-size:1.9rem;font-weight:900;color:var(--accent2)}
-    .stat-lbl{font-size:0.72rem;color:var(--text2);margin-top:3px;text-transform:uppercase;letter-spacing:0.06em}
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:700}
+.badge-blue{background:var(--blue-light);color:var(--blue)}
+.badge-green{background:var(--green-light);color:var(--green)}
+.badge-yellow{background:var(--yellow-light);color:var(--yellow)}
+.badge-red{background:var(--red-light);color:var(--red)}
+.badge-purple{background:var(--purple-light);color:var(--purple)}
+.badge-gray{background:var(--gray5);color:var(--gray)}
 
-    /* ── MAIN ── */
-    main{max-width:1240px;margin:0 auto;padding:32px 24px}
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 20px;border-radius:var(--radius);border:none;cursor:pointer;font-size:.88rem;font-weight:600;transition:all .18s;font-family:inherit}
+.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:var(--blue2);transform:translateY(-1px);box-shadow:0 4px 12px rgba(37,99,235,.35)}
+.btn-outline{background:#fff;color:var(--blue);border:1.5px solid var(--blue)}.btn-outline:hover{background:var(--blue-light)}
+.btn-gray{background:var(--gray5);color:var(--text2);border:1px solid var(--border)}.btn-gray:hover{background:var(--gray4)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#15803d}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:#b91c1c}
+.btn-sm{padding:7px 14px;font-size:.8rem}
+.btn-xs{padding:5px 10px;font-size:.74rem}
+.btn-lg{padding:13px 28px;font-size:.95rem}
 
-    /* ── TABS ── */
-    .tabs{display:flex;gap:4px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:4px;width:fit-content;margin-bottom:28px}
-    .tab{padding:9px 22px;border-radius:9px;cursor:pointer;font-size:0.88rem;font-weight:600;color:var(--text2);transition:all 0.2s;border:none;background:none}
-    .tab.active{background:var(--accent);color:#fff;box-shadow:0 2px 12px rgba(99,102,241,0.4)}
-    .tab:hover:not(.active){background:var(--bg3);color:var(--text)}
+/* ── CARD ── */
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
 
-    /* ── TOOLBAR ── */
-    .toolbar{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap;align-items:center}
-    .search-wrap{flex:1;min-width:220px;position:relative}
-    .search-wrap input{
-      width:100%;background:var(--bg2);border:1px solid var(--border);
-      border-radius:10px;padding:11px 16px 11px 42px;
-      color:var(--text);font-size:0.9rem;outline:none;transition:border-color 0.2s;font-family:inherit;
-    }
-    .search-wrap input:focus{border-color:var(--accent)}
-    .search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none}
-    select{
-      background:var(--bg2);border:1px solid var(--border);border-radius:10px;
-      padding:11px 14px;color:var(--text);font-size:0.88rem;outline:none;cursor:pointer;font-family:inherit;
-    }
-    select:focus{border-color:var(--accent)}
+/* ── FORM ELEMENTS ── */
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:.8rem;font-weight:600;color:var(--text2);margin-bottom:5px}
+.form-input{width:100%;background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:.9rem;outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.form-select{width:100%;background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:.88rem;outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
+.form-select:focus{border-color:var(--blue)}
 
-    /* ── BUTTONS ── */
-    .btn{padding:11px 20px;border-radius:10px;border:none;cursor:pointer;font-size:0.88rem;font-weight:600;transition:all 0.2s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
-    .btn-primary{background:var(--accent);color:#fff;box-shadow:0 2px 10px rgba(99,102,241,0.3)}
-    .btn-primary:hover{background:#818cf8;transform:translateY(-1px);box-shadow:0 4px 16px rgba(99,102,241,0.4)}
-    .btn-success{background:var(--green);color:#fff}
-    .btn-success:hover{background:#34d399}
-    .btn-danger{background:var(--red);color:#fff}
-    .btn-danger:hover{background:#f87171}
-    .btn-ghost{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
-    .btn-ghost:hover{background:var(--bg4)}
-    .btn-sm{padding:7px 12px;font-size:0.78rem}
-    .btn-icon{padding:7px 10px;font-size:0.85rem}
+/* ══════════════════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════════════════ */
+#navbar{
+  background:#fff;border-bottom:1px solid var(--border);
+  height:64px;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:300;box-shadow:var(--shadow);
+}
+.nav-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;color:var(--blue);cursor:pointer}
+.nav-brand-icon{background:var(--blue);color:#fff;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-link{padding:8px 14px;border-radius:8px;font-size:.88rem;font-weight:500;color:var(--text2);cursor:pointer;transition:all .15s}
+.nav-link:hover{background:var(--gray5);color:var(--text)}
+.nav-link.active{color:var(--blue);font-weight:600}
+.nav-link.active::after{content:'';display:block;height:2px;background:var(--blue);border-radius:2px;margin-top:2px}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-avatar{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;cursor:pointer}
+.nav-search{display:flex;align-items:center;gap:8px;background:var(--gray5);border:1.5px solid var(--border);border-radius:999px;padding:7px 16px;min-width:200px}
+.nav-search input{background:none;border:none;outline:none;font-size:.88rem;color:var(--text);width:100%}
 
-    /* ── VEHICLE GRID ── */
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+/* ══════════════════════════════════════════════════════
+   PAGE WRAPPER
+══════════════════════════════════════════════════════ */
+.page{display:none}
+.page.active{display:block}
 
-    /* ── VEHICLE CARD ── */
-    .v-card{
-      background:var(--bg2);border:1px solid var(--border);
-      border-radius:var(--radius);overflow:hidden;
-      display:flex;flex-direction:column;
-      transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;
-    }
-    .v-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 32px rgba(99,102,241,0.15)}
-    .v-stripe{height:4px}
-    .v-body{padding:18px;flex:1;display:flex;flex-direction:column;gap:4px}
-    .v-category{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent2);margin-bottom:4px}
-    .v-title{font-size:1.05rem;font-weight:800;line-height:1.2}
-    .v-sub{color:var(--text2);font-size:0.82rem}
-    .v-specs{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-    .v-spec{
-      background:var(--bg3);border:1px solid var(--border);
-      border-radius:6px;padding:3px 9px;font-size:0.74rem;color:var(--text2);
-    }
-    .v-footer{
-      display:flex;justify-content:space-between;align-items:center;
-      margin-top:12px;padding-top:12px;border-top:1px solid var(--border);
-    }
-    .v-price{font-size:1.1rem;font-weight:800;color:var(--accent2)}
-    .v-price span{font-size:0.72rem;font-weight:400;color:var(--text3)}
-    .v-actions{display:flex;gap:6px}
-    .badge{padding:4px 10px;border-radius:20px;font-size:0.72rem;font-weight:700}
-    .badge-green{background:#10b98122;color:var(--green);border:1px solid #10b98144}
-    .badge-red{background:#ef444422;color:var(--red);border:1px solid #ef444444}
-    .badge-yellow{background:#f59e0b22;color:var(--yellow);border:1px solid #f59e0b44}
+/* ══════════════════════════════════════════════════════
+   HOMEPAGE
+══════════════════════════════════════════════════════ */
+.hero{
+  background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 50%,#1d4ed8 100%);
+  padding:64px 40px;position:relative;overflow:hidden;min-height:420px;
+  display:flex;align-items:center;
+}
+.hero::before{content:'';position:absolute;right:0;top:0;bottom:0;width:50%;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Cellipse cx='500' cy='200' rx='350' ry='200' fill='rgba(255,255,255,0.03)'/%3E%3Cellipse cx='600' cy='150' rx='250' ry='150' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E") no-repeat center;
+}
+.hero-content{max-width:520px;z-index:1;position:relative}
+.hero h1{font-size:3rem;font-weight:900;color:#fff;line-height:1.1;margin-bottom:14px;letter-spacing:-0.03em}
+.hero h1 span{color:#93c5fd}
+.hero-sub{color:#bfdbfe;font-size:1rem;margin-bottom:28px;line-height:1.6}
+.hero-search{background:#fff;border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-lg);display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.hero-field{flex:1;min-width:140px}
+.hero-field label{display:block;font-size:.74rem;font-weight:700;color:var(--text3);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
+.hero-field input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-size:.88rem;outline:none;color:var(--text)}
+.hero-field input:focus{border-color:var(--blue)}
+.hero-car{position:absolute;right:60px;bottom:0;font-size:14rem;opacity:.15;line-height:1}
 
-    /* ── OWNER CARD ── */
-    .o-card{
-      background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
-      padding:20px;display:flex;align-items:center;gap:16px;
-      transition:border-color 0.2s,transform 0.2s;
-    }
-    .o-card:hover{border-color:var(--green);transform:translateY(-2px)}
-    .o-avatar{
-      width:54px;height:54px;border-radius:14px;flex-shrink:0;
-      display:flex;align-items:center;justify-content:center;
-      font-weight:900;font-size:1.3rem;
-    }
-    .o-info{flex:1}
-    .o-name{font-weight:800;font-size:1rem}
-    .o-city{color:var(--text2);font-size:0.82rem;margin-top:2px}
-    .o-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-    .o-tag{background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:2px 8px;font-size:0.72rem;color:var(--text2)}
+.section{padding:48px 40px}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.section-title{font-size:1.3rem;font-weight:800;color:var(--text)}
+.view-all{font-size:.85rem;color:var(--blue);font-weight:600;cursor:pointer}
+.view-all:hover{text-decoration:underline}
 
-    /* ── API DOCS ── */
-    .endpoint{
-      background:var(--bg2);border:1px solid var(--border);border-radius:10px;
-      padding:12px 16px;display:flex;align-items:center;gap:12px;
-      font-size:0.84rem;margin-bottom:8px;
-      transition:border-color 0.2s;
-    }
-    .endpoint:hover{border-color:var(--accent)}
-    .method{padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.72rem;min-width:56px;text-align:center;letter-spacing:0.03em}
-    .GET   {background:#3b82f622;color:#60a5fa;border:1px solid #3b82f655}
-    .POST  {background:#10b98122;color:#34d399;border:1px solid #10b98155}
-    .PUT   {background:#f59e0b22;color:#fbbf24;border:1px solid #f59e0b55}
-    .DELETE{background:#ef444422;color:#f87171;border:1px solid #ef444455}
-    .ep-path{font-family:'Courier New',monospace;color:var(--text);flex:1}
-    .ep-desc{color:var(--text2);font-size:0.78rem}
-    .ep-section{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);font-weight:700;margin:20px 0 10px}
+/* Category cards */
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.cat-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-lg);
+  padding:20px 12px;text-align:center;cursor:pointer;
+  transition:all .2s;
+}
+.cat-card:hover{border-color:var(--blue);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.cat-card:hover .cat-icon{background:var(--blue);color:#fff}
+.cat-icon{width:52px;height:52px;border-radius:50%;background:var(--blue-light);color:var(--blue);font-size:1.5rem;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;transition:all .2s}
+.cat-name{font-size:.8rem;font-weight:700;color:var(--text2)}
+.cat-count{font-size:.72rem;color:var(--text3);margin-top:2px}
 
-    /* ── MODAL ── */
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;z-index:999;backdrop-filter:blur(6px);padding:20px}
-    .overlay.open{display:flex}
-    .modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:500px;padding:28px;animation:slideUp 0.22s ease}
-    @keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-    .modal h2{font-size:1.15rem;font-weight:800;margin-bottom:20px}
-    .fgroup{margin-bottom:14px}
-    .fgroup label{display:block;font-size:0.8rem;color:var(--text2);font-weight:600;margin-bottom:5px}
-    .fgroup input,.fgroup select,.fgroup textarea{
-      width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:9px;
-      padding:10px 14px;color:var(--text);font-size:0.9rem;outline:none;transition:border-color 0.2s;font-family:inherit;
-    }
-    .fgroup input:focus,.fgroup select:focus,.fgroup textarea:focus{border-color:var(--accent)}
-    .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
-    .toggle-row{display:flex;align-items:center;justify-content:space-between}
-    .toggle{position:relative;width:46px;height:26px;background:var(--bg3);border-radius:13px;cursor:pointer;border:1px solid var(--border);transition:background 0.2s}
-    .toggle.on{background:var(--green);border-color:var(--green)}
-    .toggle::after{content:'';position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;top:2px;left:2px;transition:left 0.2s}
-    .toggle.on::after{left:22px}
+/* Featured vehicle cards */
+.vehicle-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-lg);
+  overflow:hidden;cursor:pointer;transition:all .2s;
+}
+.vehicle-card:hover{border-color:var(--blue);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.vc-img{height:170px;display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative;overflow:hidden}
+.vc-featured{position:absolute;top:10px;left:10px}
+.vc-body{padding:16px}
+.vc-name{font-weight:800;font-size:1rem;margin-bottom:4px}
+.vc-stars{display:flex;align-items:center;gap:4px;font-size:.82rem;margin-bottom:8px}
+.vc-price{font-size:1.3rem;font-weight:900;color:var(--blue);margin-bottom:4px}
+.vc-price span{font-size:.8rem;font-weight:400;color:var(--text3)}
+.vc-loc{font-size:.8rem;color:var(--text3);display:flex;align-items:center;gap:4px}
+.vc-btn{margin-top:12px}
 
-    /* ── TOAST ── */
-    .toasts{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px}
-    .toast{
-      background:var(--bg2);border:1px solid var(--border);border-radius:11px;
-      padding:12px 18px;font-size:0.86rem;animation:fadeIn 0.25s ease;
-      display:flex;align-items:center;gap:10px;box-shadow:0 6px 24px rgba(0,0,0,0.5);
-      max-width:300px;
-    }
-    .toast.success{border-color:var(--green)}
-    .toast.error{border-color:var(--red)}
-    @keyframes fadeIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
+/* ══════════════════════════════════════════════════════
+   VEHICLES PAGE
+══════════════════════════════════════════════════════ */
+.vehicles-layout{display:grid;grid-template-columns:260px 1fr;gap:24px;padding:28px 32px;max-width:1300px;margin:0 auto}
+.filter-sidebar{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:20px;height:fit-content;position:sticky;top:88px}
+.filter-title{font-size:1rem;font-weight:800;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.filter-section{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.filter-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.filter-section-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:10px}
+.filter-option{display:flex;align-items:center;justify-content:space-between;padding:6px 0;cursor:pointer}
+.filter-option label{font-size:.86rem;color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:8px}
+.filter-option input[type=checkbox]{accent-color:var(--blue);width:15px;height:15px}
+.filter-count{font-size:.74rem;color:var(--text3);background:var(--gray5);padding:1px 7px;border-radius:999px}
+.price-range{padding:8px 0}
+.price-range input[type=range]{width:100%;accent-color:var(--blue);margin:8px 0}
+.price-labels{display:flex;justify-content:space-between;font-size:.78rem;color:var(--text3)}
 
-    /* ── EMPTY ── */
-    .empty{text-align:center;padding:64px 20px;color:var(--text2);grid-column:1/-1}
-    .empty-icon{font-size:3.2rem;margin-bottom:14px}
+.vehicles-main{}
+.vehicles-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.vehicles-count{font-size:1.1rem;font-weight:800}
+.vehicles-count span{color:var(--text3);font-weight:400;font-size:.9rem}
+.sort-select{border:1.5px solid var(--border);border-radius:8px;padding:8px 32px 8px 12px;font-size:.85rem;outline:none;cursor:pointer;background:#fff;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.vehicles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
 
-    /* ── SECTION LABEL ── */
-    .section-label{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);font-weight:700;margin-bottom:16px}
+/* ══════════════════════════════════════════════════════
+   VEHICLE DETAIL PAGE
+══════════════════════════════════════════════════════ */
+.detail-layout{display:grid;grid-template-columns:1fr 340px;gap:24px;padding:28px 32px;max-width:1200px;margin:0 auto}
+.detail-gallery{margin-bottom:20px}
+.detail-main-img{height:300px;border-radius:var(--radius-lg);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:8rem;background:#f1f5f9;margin-bottom:10px;overflow:hidden}
+.detail-thumbs{display:flex;gap:8px}
+.detail-thumb{width:72px;height:52px;border-radius:8px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.8rem;cursor:pointer;transition:border-color .15s}
+.detail-thumb:hover,.detail-thumb.active{border-color:var(--blue)}
+.detail-name{font-size:1.6rem;font-weight:900;margin-bottom:6px}
+.detail-stars{display:flex;align-items:center;gap:6px;margin-bottom:12px}
+.detail-price{font-size:1.8rem;font-weight:900;color:var(--blue);margin-bottom:16px}
+.detail-price span{font-size:.9rem;font-weight:400;color:var(--text3)}
+.detail-specs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.detail-spec{background:var(--gray5);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:8px}
+.detail-spec-icon{font-size:1.1rem}
+.detail-spec-info{}
+.detail-spec-label{font-size:.72rem;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.detail-spec-value{font-size:.88rem;font-weight:700;color:var(--text)}
+.detail-desc{font-size:.88rem;color:var(--text2);line-height:1.6;margin-bottom:20px}
+.detail-tabs{display:flex;gap:4px;border-bottom:2px solid var(--border);margin-bottom:16px}
+.detail-tab{padding:9px 16px;font-size:.88rem;font-weight:600;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
+.detail-tab.active{color:var(--blue);border-color:var(--blue)}
 
-    @media(max-width:640px){
-      .hero h1{font-size:1.8rem}
-      .frow{grid-template-columns:1fr}
-      nav{padding:0 16px}
-      main{padding:20px 14px}
-    }
-  </style>
+/* Booking card */
+.booking-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-md);position:sticky;top:88px}
+.booking-card-title{font-size:1rem;font-weight:800;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.booking-price-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:.88rem}
+.booking-price-row.total{font-weight:800;font-size:1rem;border-top:1px solid var(--border);padding-top:12px;margin-top:4px}
+.booking-total-amount{color:var(--blue);font-size:1.1rem}
+
+/* ══════════════════════════════════════════════════════
+   DASHBOARD LAYOUT
+══════════════════════════════════════════════════════ */
+.dash-layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 64px)}
+.dash-sidebar{background:#0f172a;padding:20px 0;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto}
+.dash-logo{display:flex;align-items:center;gap:10px;padding:0 20px 20px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:16px}
+.dash-logo-icon{background:var(--blue);color:#fff;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.dash-logo-text{font-weight:800;font-size:.95rem;color:#fff}
+.dash-logo-sub{font-size:.72rem;color:#94a3b8}
+.dash-nav-item{display:flex;align-items:center;gap:10px;padding:10px 20px;cursor:pointer;transition:all .15s;color:#94a3b8;font-size:.86rem;font-weight:500;border-left:3px solid transparent}
+.dash-nav-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.dash-nav-item.active{background:rgba(37,99,235,.2);color:#fff;border-color:var(--blue);font-weight:600}
+.dash-nav-item .nav-icon{font-size:1rem;width:20px;text-align:center}
+.dash-nav-section{padding:14px 20px 6px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#475569}
+.dash-main{padding:28px;background:var(--gray6);overflow-y:auto}
+
+/* Stat cards */
+.stat-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:18px;box-shadow:var(--shadow)}
+.stat-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.stat-card-label{font-size:.78rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
+.stat-card-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.stat-card-num{font-size:1.8rem;font-weight:900;color:var(--text);line-height:1}
+.stat-card-sub{font-size:.75rem;color:var(--text3);margin-top:4px}
+.stat-card-trend{font-size:.75rem;font-weight:600;display:inline-flex;align-items:center;gap:2px;margin-top:6px}
+.trend-up{color:var(--green)}.trend-down{color:var(--red)}
+
+/* Table */
+.data-table{width:100%;border-collapse:collapse}
+.data-table th{background:var(--gray5);padding:10px 14px;text-align:left;font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);border-bottom:1px solid var(--border)}
+.data-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text2)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:var(--gray6)}
+
+/* Quick actions */
+.quick-actions{display:flex;flex-direction:column;gap:10px}
+.quick-action-btn{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:.86rem;font-weight:600;color:var(--text);transition:all .15s}
+.quick-action-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+
+/* Chart (CSS-based) */
+.chart-container{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow)}
+.chart-bars{display:flex;align-items:flex-end;gap:8px;height:120px;margin-top:16px}
+.chart-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.chart-bar{background:var(--blue);border-radius:4px 4px 0 0;width:100%;transition:height .3s;cursor:pointer}
+.chart-bar:hover{background:var(--blue2)}
+.chart-label{font-size:.68rem;color:var(--text3)}
+
+/* Donut chart */
+.donut{width:120px;height:120px;border-radius:50%;background:conic-gradient(var(--blue) 0 60%,var(--green) 60% 80%,var(--red) 80% 92%,var(--yellow) 92% 100%);display:flex;align-items:center;justify-content:center;position:relative}
+.donut::after{content:'';position:absolute;width:70px;height:70px;background:#fff;border-radius:50%}
+.donut-label{position:relative;z-index:1;font-weight:800;font-size:1rem;color:var(--text)}
+.donut-legend{display:flex;flex-direction:column;gap:6px}
+.donut-legend-item{display:flex;align-items:center;gap:8px;font-size:.8rem}
+.donut-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* Activity feed */
+.activity-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.activity-item:last-child{border-bottom:none}
+.activity-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.activity-content{flex:1}
+.activity-text{font-size:.84rem;color:var(--text2);line-height:1.4}
+.activity-time{font-size:.74rem;color:var(--text3);margin-top:2px}
+
+/* ══════════════════════════════════════════════════════
+   MODALS
+══════════════════════════════════════════════════════ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:999;backdrop-filter:blur(4px);padding:16px}
+.modal-overlay.open{display:flex}
+.modal-box{background:#fff;border-radius:var(--radius-xl);padding:28px;width:100%;max-width:480px;box-shadow:var(--shadow-lg);animation:popIn .22s ease}
+.modal-box.modal-lg{max-width:600px}
+@keyframes popIn{from{opacity:0;transform:scale(.96) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.modal-title{font-size:1.1rem;font-weight:800}
+.modal-close{background:var(--gray5);border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--text3)}
+.modal-close:hover{background:var(--gray4)}
+.modal-footer{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+
+/* ══════════════════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════════════════ */
+.toasts-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.toast-item{background:#fff;border:1.5px solid var(--border);border-radius:11px;padding:12px 18px;font-size:.86rem;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;animation:slideR .25s ease;max-width:300px}
+.toast-item.toast-success{border-color:var(--green)}
+.toast-item.toast-error{border-color:var(--red)}
+@keyframes slideR{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
+
+/* ══════════════════════════════════════════════════════
+   STARS
+══════════════════════════════════════════════════════ */
+.stars{color:#f59e0b;letter-spacing:1px}
+
+@media(max-width:900px){
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .stat-cards{grid-template-columns:repeat(2,1fr)}
+  .detail-layout,.vehicles-layout{grid-template-columns:1fr}
+  .dash-layout{grid-template-columns:1fr}
+  .dash-sidebar{display:none}
+}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-brand">
-    <div class="nav-logo">🚗</div>
-    <div>
-      <div class="nav-title">RentEase <span class="nav-tagline">· Your Journey, Your Choice.</span></div>
-    </div>
+<!-- ══ NAVBAR ══ -->
+<nav id="navbar">
+  <div class="nav-brand" onclick="goPage('home')">
+    <div class="nav-brand-icon">🚗</div>
+    RentEase
   </div>
-  <div class="nav-badge">
-    <strong>Rahumathulla Misfar Mohammed</strong> · NIM 2005342004231
+  <div class="nav-links" id="nav-main-links">
+    <span class="nav-link active" onclick="goPage('home')">Home</span>
+    <span class="nav-link" onclick="goPage('vehicles')">Vehicles</span>
+    <span class="nav-link" onclick="goPage('about')">About</span>
+    <span class="nav-link" onclick="goPage('contact')">Contact</span>
+  </div>
+  <div class="nav-actions" id="nav-actions-guest">
+    <button class="btn btn-gray btn-sm" onclick="goPage('customer-dash')">Login</button>
+    <button class="btn btn-blue btn-sm" onclick="goPage('customer-dash')">Register</button>
+  </div>
+  <div class="nav-actions hidden" id="nav-actions-user">
+    <div class="nav-search">
+      <span>🔍</span>
+      <input type="text" placeholder="Search vehicles..." oninput="liveSearch(this.value)"/>
+    </div>
+    <span style="font-size:1.3rem;cursor:pointer">🔔</span>
+    <div class="nav-avatar" onclick="goPage('customer-dash')">JD</div>
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow">🎓 Midterm Project · Node.js &amp; Express 5</div>
-  <h1>Vehicle Rental<br/><span>Marketplace API</span></h1>
-  <p class="hero-sub">Multi-vendor vehicle rental platform — browse, compare &amp; book vehicles from independent owners</p>
-  <div class="stats">
-    <div class="stat"><div class="stat-num" id="s-vehicles">–</div><div class="stat-lbl">Vehicles</div></div>
-    <div class="stat"><div class="stat-num" id="s-owners">–</div><div class="stat-lbl">Owners</div></div>
-    <div class="stat"><div class="stat-num" id="s-avail">–</div><div class="stat-lbl">Available</div></div>
-    <div class="stat"><div class="stat-num" id="s-cats">–</div><div class="stat-lbl">Categories</div></div>
-  </div>
-</div>
+<!-- ══ PAGES ══ -->
 
-<!-- MAIN -->
-<main>
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('vehicles')">🚗 Vehicles</button>
-    <button class="tab" onclick="switchTab('owners')">👤 Owners</button>
-    <button class="tab" onclick="switchTab('api')">🔌 API Docs</button>
-  </div>
-
-  <!-- VEHICLES TAB -->
-  <div id="tab-vehicles">
-    <div class="toolbar">
-      <div class="search-wrap">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="v-search" placeholder="Search brand, model, description…" oninput="filterVehicles()"/>
+<!-- ━━ HOME PAGE ━━ -->
+<div class="page active" id="page-home">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Your Journey,<br/><span>Your Choice.</span></h1>
+      <p class="hero-sub">Rent the perfect vehicle from trusted owners across the city. Compare prices, check availability, and book instantly.</p>
+      <div class="hero-search">
+        <div class="hero-field" style="flex:2">
+          <label>🔍 Search Cars</label>
+          <input id="hero-q" type="text" placeholder="Brand, model, category..."/>
+        </div>
+        <div class="hero-field">
+          <label>📍 Location</label>
+          <input id="hero-loc" type="text" placeholder="Jakarta, Bali..."/>
+        </div>
+        <div class="hero-field">
+          <label>📅 Pick-up Date</label>
+          <input type="date"/>
+        </div>
+        <div class="hero-field">
+          <label>📅 Return Date</label>
+          <input type="date"/>
+        </div>
+        <button class="btn btn-blue btn-lg" onclick="heroSearch()">Search</button>
       </div>
-      <select id="v-cat" onchange="filterVehicles()">
-        <option value="">All Categories</option>
-      </select>
-      <select id="v-loc" onchange="filterVehicles()">
-        <option value="">All Locations</option>
-      </select>
-      <select id="v-avail" onchange="filterVehicles()">
-        <option value="">All Status</option>
-        <option value="true">✅ Available</option>
-        <option value="false">❌ Not Available</option>
-      </select>
-      <button class="btn btn-primary" onclick="openAddVehicle()">➕ Add Vehicle</button>
     </div>
-    <div id="v-grid" class="grid"><div class="empty"><div class="empty-icon">🔄</div><p>Loading vehicles…</p></div></div>
+    <div class="hero-car">🚙</div>
   </div>
 
-  <!-- OWNERS TAB -->
-  <div id="tab-owners" style="display:none">
-    <div class="toolbar">
-      <div class="search-wrap">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="o-search" placeholder="Search owners by name or city…" oninput="renderOwners()"/>
-      </div>
-      <button class="btn btn-success" onclick="openAddOwner()">➕ Add Owner</button>
+  <!-- Popular Categories -->
+  <div class="section" style="background:#fff">
+    <div class="section-header">
+      <div class="section-title">🚗 Popular Categories</div>
+      <span class="view-all" onclick="goPage('vehicles')">View All →</span>
     </div>
-    <div id="o-grid" class="grid"><div class="empty"><div class="empty-icon">🔄</div><p>Loading owners…</p></div></div>
-  </div>
-
-  <!-- API DOCS TAB -->
-  <div id="tab-api" style="display:none">
-    <div class="ep-section">🚗 Vehicle Endpoints</div>
-    <div class="endpoint"><span class="method GET">GET</span><span class="ep-path">/</span><span class="ep-desc">Welcome, author info &amp; endpoint list</span></div>
-    <div class="endpoint"><span class="method GET">GET</span><span class="ep-path">/vehicles</span><span class="ep-desc">List all vehicles</span></div>
-    <div class="endpoint"><span class="method GET">GET</span><span class="ep-path">/vehicles/:id</span><span class="ep-desc">Get one vehicle — 404 if not found</span></div>
-    <div class="endpoint"><span class="method GET">GET</span><span class="ep-path">/vehicles/search?q=&amp;location=&amp;category=&amp;available=</span><span class="ep-desc">🎁 Bonus: search with query params</span></div>
-    <div class="endpoint"><span class="method GET">GET</span><span class="ep-path">/vehicles/category/:name</span><span class="ep-desc">Filter by category — optional param</span></div>
-    <div class="endpoint"><span class="method GET">GET</span><span class="ep-path">/vehicles/files/*path</span><span class="ep-desc">Named wildcard — returns path segments</span></div>
-    <div class="endpoint"><span class="method POST">POST</span><span class="ep-path">/vehicles</span><span class="ep-desc">Add vehicle — 400 if missing fields</span></div>
-    <div class="endpoint"><span class="method PUT">PUT</span><span class="ep-path">/vehicles/:id</span><span class="ep-desc">Update vehicle — 404 if not found</span></div>
-    <div class="endpoint"><span class="method DELETE">DELETE</span><span class="ep-path">/vehicles/:id</span><span class="ep-desc">Delete vehicle 🔒 requires auth token</span></div>
-
-    <div class="ep-section">👤 Owner Endpoints (Bonus +5)</div>
-    <div class="endpoint"><span class="method GET">GET</span><span class="ep-path">/owners</span><span class="ep-desc">List all owners</span></div>
-    <div class="endpoint"><span class="method GET">GET</span><span class="ep-path">/owners/:id</span><span class="ep-desc">Get one owner — 404 if not found</span></div>
-    <div class="endpoint"><span class="method GET">GET</span><span class="ep-path">/owners/search?q=&amp;city=&amp;verified=</span><span class="ep-desc">Search owners</span></div>
-    <div class="endpoint"><span class="method GET">GET</span><span class="ep-path">/owners/city/:name</span><span class="ep-desc">Filter owners by city</span></div>
-    <div class="endpoint"><span class="method POST">POST</span><span class="ep-path">/owners</span><span class="ep-desc">Register new owner — 400 if missing fields</span></div>
-    <div class="endpoint"><span class="method PUT">PUT</span><span class="ep-path">/owners/:id</span><span class="ep-desc">Update owner</span></div>
-    <div class="endpoint"><span class="method DELETE">DELETE</span><span class="ep-path">/owners/:id</span><span class="ep-desc">Remove owner 🔒 requires auth token</span></div>
-
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:18px;margin-top:16px">
-      <div style="font-size:0.82rem;color:var(--text2);font-weight:700;margin-bottom:8px">🔒 Auth Header (for POST, PUT, DELETE)</div>
-      <code style="background:var(--bg3);padding:9px 14px;border-radius:7px;font-size:0.84rem;display:block;color:var(--accent2)">Authorization: Bearer rentease-secret-2024</code>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="filterCategory('Hatchback')"><div class="cat-icon">🚗</div><div class="cat-name">Cars</div><div class="cat-count">24 vehicles</div></div>
+      <div class="cat-card" onclick="filterCategory('Motorcycle')"><div class="cat-icon">🏍️</div><div class="cat-name">Motorcycles</div><div class="cat-count">18 vehicles</div></div>
+      <div class="cat-card" onclick="filterCategory('SUV')"><div class="cat-icon">🚙</div><div class="cat-name">SUVs</div><div class="cat-count">12 vehicles</div></div>
+      <div class="cat-card" onclick="filterCategory('Van')"><div class="cat-icon">🚐</div><div class="cat-name">Vans</div><div class="cat-count">10 vehicles</div></div>
+      <div class="cat-card" onclick="filterCategory('Luxury')"><div class="cat-icon">🏎️</div><div class="cat-name">Luxury Cars</div><div class="cat-count">8 vehicles</div></div>
+      <div class="cat-card" onclick="filterCategory('Pickup')"><div class="cat-icon">🛻</div><div class="cat-name">Pickup Trucks</div><div class="cat-count">6 vehicles</div></div>
     </div>
   </div>
-</main>
 
-<!-- ADD/EDIT VEHICLE MODAL -->
-<div class="overlay" id="v-modal">
-  <div class="modal">
-    <h2 id="v-modal-title">🚗 Add New Vehicle</h2>
-    <div class="frow">
-      <div class="fgroup"><label>Brand *</label><input id="f-brand" placeholder="Toyota"/></div>
-      <div class="fgroup"><label>Model *</label><input id="f-model" placeholder="Avanza"/></div>
+  <!-- Featured Vehicles -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">⭐ Featured Vehicles</div>
+      <span class="view-all" onclick="goPage('vehicles')">View All →</span>
     </div>
-    <div class="frow">
-      <div class="fgroup"><label>Year *</label><input id="f-year" type="number" placeholder="2023" min="1990" max="2030"/></div>
-      <div class="fgroup"><label>Category *</label>
-        <select id="f-cat">
-          <option>MPV</option><option>SUV</option><option>Hatchback</option>
-          <option>Sedan</option><option>Van</option><option>Pickup</option>
-          <option>Motorcycle</option><option>Luxury</option>
-        </select>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="fgroup"><label>Price/Day (IDR) *</label><input id="f-price" type="number" placeholder="350000"/></div>
-      <div class="fgroup"><label>Seats</label><input id="f-seats" type="number" placeholder="5" min="1" max="20"/></div>
-    </div>
-    <div class="frow">
-      <div class="fgroup"><label>Transmission</label>
-        <select id="f-trans"><option>Manual</option><option>Automatic</option></select>
-      </div>
-      <div class="fgroup"><label>Fuel Type</label>
-        <select id="f-fuel"><option>Petrol</option><option>Diesel</option><option>Electric</option><option>Hybrid</option></select>
-      </div>
-    </div>
-    <div class="fgroup"><label>Location *</label><input id="f-loc" placeholder="Jakarta"/></div>
-    <div class="fgroup"><label>Description</label><input id="f-desc" placeholder="Short description of the vehicle"/></div>
-    <div class="fgroup">
-      <div class="toggle-row">
-        <label style="margin:0">Available to rent?</label>
-        <div class="toggle on" id="f-avail-toggle" onclick="toggleAvail()"></div>
-      </div>
-    </div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal('v-modal')">Cancel</button>
-      <button class="btn btn-primary" onclick="saveVehicle()">💾 Save Vehicle</button>
+    <div id="home-vehicles-grid" class="vehicles-grid"></div>
+  </div>
+
+  <!-- CTA Banner -->
+  <div style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8);padding:48px 40px;text-align:center">
+    <h2 style="color:#fff;font-size:1.8rem;font-weight:900;margin-bottom:10px">Own a Vehicle? List it on RentEase</h2>
+    <p style="color:#bfdbfe;margin-bottom:24px">Join 350+ trusted owners and earn from your idle vehicles.</p>
+    <div style="display:flex;gap:12px;justify-content:center">
+      <button class="btn btn-blue" style="background:#fff;color:var(--blue)" onclick="goPage('owner-dash')">🚗 Become an Owner</button>
+      <button class="btn btn-outline" style="color:#fff;border-color:#fff" onclick="goPage('about')">Learn More</button>
     </div>
   </div>
 </div>
 
-<!-- ADD OWNER MODAL -->
-<div class="overlay" id="o-modal">
-  <div class="modal">
-    <h2>👤 Register New Owner</h2>
-    <div class="frow">
-      <div class="fgroup"><label>Full Name *</label><input id="of-name" placeholder="Budi Santoso"/></div>
-      <div class="fgroup"><label>Phone *</label><input id="of-phone" placeholder="081234567890"/></div>
+<!-- ━━ VEHICLES PAGE ━━ -->
+<div class="page" id="page-vehicles">
+  <div class="vehicles-layout">
+    <!-- Filter Sidebar -->
+    <div class="filter-sidebar">
+      <div class="filter-title">🔧 Filters</div>
+      <div class="filter-section">
+        <div class="filter-section-title">Category</div>
+        <div id="filter-cats"></div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-title">Price Range (IDR/day)</div>
+        <div class="price-range">
+          <input type="range" min="0" max="1500000" step="50000" value="1500000" id="price-slider" oninput="updatePriceFilter(this.value)"/>
+          <div class="price-labels"><span>0</span><span id="price-max-label">1,500,000</span></div>
+        </div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-title">Location</div>
+        <div id="filter-locs"></div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-title">Availability</div>
+        <div class="filter-option"><label><input type="checkbox" id="f-avail" onchange="applyFilters()"/> Available only</label></div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-title">Transmission</div>
+        <div class="filter-option"><label><input type="checkbox" class="f-trans" value="Automatic" onchange="applyFilters()"/> Automatic</label></div>
+        <div class="filter-option"><label><input type="checkbox" class="f-trans" value="Manual" onchange="applyFilters()"/> Manual</label></div>
+      </div>
+      <button class="btn btn-gray w-full mt-3" style="font-size:.82rem" onclick="clearFilters()">✕ Clear Filters</button>
     </div>
-    <div class="frow">
-      <div class="fgroup"><label>Email *</label><input id="of-email" type="email" placeholder="budi@email.com"/></div>
-      <div class="fgroup"><label>City *</label><input id="of-city" placeholder="Jakarta"/></div>
-    </div>
-    <div class="fgroup"><label>Bio</label><input id="of-bio" placeholder="Short description about yourself as an owner"/></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal('o-modal')">Cancel</button>
-      <button class="btn btn-success" onclick="saveOwner()">✅ Register Owner</button>
+
+    <!-- Main Content -->
+    <div class="vehicles-main">
+      <div class="vehicles-header">
+        <div class="vehicles-count" id="v-count">All Vehicles <span id="v-count-num"></span></div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <input class="form-input" style="max-width:200px;padding:8px 12px;font-size:.85rem" placeholder="🔍 Quick search..." id="v-quick-search" oninput="applyFilters()"/>
+          <select class="sort-select" id="v-sort" onchange="applyFilters()">
+            <option value="default">Sort by: Default</option>
+            <option value="price-asc">Lowest Price</option>
+            <option value="price-desc">Highest Price</option>
+            <option value="rating">Highest Rated</option>
+            <option value="year">Newest First</option>
+          </select>
+        </div>
+      </div>
+      <div id="vehicles-grid" class="vehicles-grid"></div>
     </div>
   </div>
 </div>
 
-<!-- DELETE CONFIRM MODAL -->
-<div class="overlay" id="del-modal">
-  <div class="modal" style="max-width:380px;text-align:center">
-    <div style="font-size:2.8rem;margin-bottom:12px">🗑️</div>
-    <h2 style="margin-bottom:8px">Remove Vehicle?</h2>
-    <p style="color:var(--text2);font-size:0.9rem;margin-bottom:24px" id="del-msg">This cannot be undone.</p>
-    <div class="modal-actions" style="justify-content:center">
-      <button class="btn btn-ghost" onclick="closeModal('del-modal')">Cancel</button>
-      <button class="btn btn-danger" onclick="confirmDelete()">🗑️ Remove</button>
+<!-- ━━ VEHICLE DETAIL PAGE ━━ -->
+<div class="page" id="page-detail">
+  <div style="padding:16px 32px;border-bottom:1px solid var(--border);background:#fff;display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--text3)">
+    <span style="cursor:pointer;color:var(--blue)" onclick="goPage('home')">Home</span> /
+    <span style="cursor:pointer;color:var(--blue)" onclick="goPage('vehicles')">Vehicles</span> /
+    <span id="detail-breadcrumb" style="color:var(--text)">Vehicle Details</span>
+  </div>
+  <div class="detail-layout" id="detail-content"></div>
+</div>
+
+<!-- ━━ CUSTOMER DASHBOARD ━━ -->
+<div class="page" id="page-customer-dash">
+  <div class="dash-layout">
+    <div class="dash-sidebar">
+      <div class="dash-logo">
+        <div class="dash-logo-icon">🚗</div>
+        <div><div class="dash-logo-text">RentEase</div><div class="dash-logo-sub">Customer</div></div>
+      </div>
+      <div class="dash-nav-item active" onclick="showDashTab('c-overview')"><span class="nav-icon">📊</span> Dashboard</div>
+      <div class="dash-nav-item" onclick="showDashTab('c-bookings')"><span class="nav-icon">📋</span> My Bookings</div>
+      <div class="dash-nav-item" onclick="showDashTab('c-wishlist')"><span class="nav-icon">❤️</span> Wishlist</div>
+      <div class="dash-nav-item" onclick="showDashTab('c-reviews')"><span class="nav-icon">⭐</span> My Reviews</div>
+      <div class="dash-nav-item" onclick="showDashTab('c-profile')"><span class="nav-icon">👤</span> Profile</div>
+      <div class="dash-nav-item" onclick="showDashTab('c-notifications')"><span class="nav-icon">🔔</span> Notifications</div>
+      <div class="dash-nav-item" onclick="showDashTab('c-support')"><span class="nav-icon">💬</span> Support</div>
+      <div class="dash-nav-section">Account</div>
+      <div class="dash-nav-item" onclick="goPage('home')"><span class="nav-icon">🚗</span> Browse Vehicles</div>
+      <div class="dash-nav-item" onclick="goPage('home')"><span class="nav-icon">🚪</span> Logout</div>
+    </div>
+    <div class="dash-main" id="customer-dash-content">
+      <!-- Overview tab rendered by JS -->
     </div>
   </div>
 </div>
 
-<!-- TOAST CONTAINER -->
-<div class="toasts" id="toasts"></div>
+<!-- ━━ OWNER DASHBOARD ━━ -->
+<div class="page" id="page-owner-dash">
+  <div class="dash-layout">
+    <div class="dash-sidebar">
+      <div class="dash-logo">
+        <div class="dash-logo-icon">🏢</div>
+        <div><div class="dash-logo-text">RentEase</div><div class="dash-logo-sub">Vehicle Owner</div></div>
+      </div>
+      <div class="dash-nav-item active" onclick="showOwnerTab('o-overview')"><span class="nav-icon">📊</span> Dashboard</div>
+      <div class="dash-nav-item" onclick="showOwnerTab('o-vehicles')"><span class="nav-icon">🚗</span> My Vehicles</div>
+      <div class="dash-nav-item" onclick="showOwnerTab('o-requests')"><span class="nav-icon">📨</span> Booking Requests</div>
+      <div class="dash-nav-item" onclick="showOwnerTab('o-active')"><span class="nav-icon">🔄</span> Active Rentals</div>
+      <div class="dash-nav-item" onclick="showOwnerTab('o-history')"><span class="nav-icon">📅</span> Rental History</div>
+      <div class="dash-nav-item" onclick="showOwnerTab('o-earnings')"><span class="nav-icon">💰</span> Earnings</div>
+      <div class="dash-nav-item" onclick="showOwnerTab('o-reviews')"><span class="nav-icon">⭐</span> Reviews</div>
+      <div class="dash-nav-section">Account</div>
+      <div class="dash-nav-item" onclick="showOwnerTab('o-profile')"><span class="nav-icon">👤</span> Profile</div>
+      <div class="dash-nav-item" onclick="goPage('home')"><span class="nav-icon">🚪</span> Logout</div>
+    </div>
+    <div class="dash-main" id="owner-dash-content"></div>
+  </div>
+</div>
+
+<!-- ━━ ADMIN PANEL ━━ -->
+<div class="page" id="page-admin">
+  <div class="dash-layout">
+    <div class="dash-sidebar">
+      <div class="dash-logo">
+        <div class="dash-logo-icon">⚙️</div>
+        <div><div class="dash-logo-text">RentEase</div><div class="dash-logo-sub">Admin Panel</div></div>
+      </div>
+      <div class="dash-nav-item active" onclick="showAdminTab('a-overview')"><span class="nav-icon">📊</span> Dashboard</div>
+      <div class="dash-nav-item" onclick="showAdminTab('a-customers')"><span class="nav-icon">👥</span> Customers</div>
+      <div class="dash-nav-item" onclick="showAdminTab('a-owners')"><span class="nav-icon">🏢</span> Owners</div>
+      <div class="dash-nav-item" onclick="showAdminTab('a-vehicles')"><span class="nav-icon">🚗</span> Vehicles</div>
+      <div class="dash-nav-item" onclick="showAdminTab('a-bookings')"><span class="nav-icon">📋</span> Bookings</div>
+      <div class="dash-nav-item" onclick="showAdminTab('a-reviews')"><span class="nav-icon">⭐</span> Reviews</div>
+      <div class="dash-nav-item" onclick="showAdminTab('a-reports')"><span class="nav-icon">📈</span> Reports</div>
+      <div class="dash-nav-section">System</div>
+      <div class="dash-nav-item" onclick="showAdminTab('a-settings')"><span class="nav-icon">⚙️</span> Settings</div>
+      <div class="dash-nav-item" onclick="goPage('home')"><span class="nav-icon">🚪</span> Logout</div>
+    </div>
+    <div class="dash-main" id="admin-dash-content"></div>
+  </div>
+</div>
+
+<!-- ━━ ABOUT ━━ -->
+<div class="page" id="page-about">
+  <div style="max-width:800px;margin:48px auto;padding:0 24px;text-align:center">
+    <div style="font-size:4rem;margin-bottom:16px">🚗</div>
+    <h1 style="font-size:2rem;font-weight:900;margin-bottom:12px">About RentEase</h1>
+    <p style="color:var(--text2);line-height:1.8;font-size:1rem;margin-bottom:24px">RentEase is a multi-vendor vehicle rental marketplace connecting customers with vehicle owners. Built as part of the Midterm Project — Node.js & Express 5.</p>
+    <div class="grid-3" style="margin-top:32px">
+      <div class="card p-6" style="text-align:center"><div style="font-size:2.5rem">🛡️</div><div class="font-bold mt-2">Trusted Owners</div><div class="text-sm text-gray mt-1">All owners are verified</div></div>
+      <div class="card p-6" style="text-align:center"><div style="font-size:2.5rem">💰</div><div class="font-bold mt-2">Best Prices</div><div class="text-sm text-gray mt-1">Compare and save</div></div>
+      <div class="card p-6" style="text-align:center"><div style="font-size:2.5rem">⚡</div><div class="font-bold mt-2">Instant Booking</div><div class="text-sm text-gray mt-1">Book in seconds</div></div>
+    </div>
+    <div style="margin-top:32px;padding:20px;background:#fff;border-radius:14px;border:1px solid var(--border)">
+      <div style="font-size:.85rem;color:var(--text2)"><strong>Author:</strong> Rahumathulla Misfar Mohammed · NIM: 2005342004231<br/><strong>Project:</strong> Midterm — Build a REST API with Express.js<br/><strong>Theme:</strong> Vehicle Rental Marketplace (RentEase)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━ CONTACT ━━ -->
+<div class="page" id="page-contact">
+  <div style="max-width:600px;margin:48px auto;padding:0 24px">
+    <h1 style="font-size:1.8rem;font-weight:900;margin-bottom:8px">Contact Us</h1>
+    <p style="color:var(--text2);margin-bottom:28px">Have questions? We'd love to hear from you.</p>
+    <div class="card p-6">
+      <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" placeholder="Enter your name"/></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="you@email.com"/></div>
+      <div class="form-group"><label class="form-label">Message</label><textarea class="form-input" rows="4" placeholder="Your message..."></textarea></div>
+      <button class="btn btn-blue w-full" onclick="toast('✅ Message sent!','success')">Send Message</button>
+    </div>
+  </div>
+</div>
+
+<!-- ━━ MODALS ━━ -->
+<!-- Add/Edit Vehicle Modal -->
+<div class="modal-overlay" id="v-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="v-modal-title">🚗 Add New Vehicle</div>
+      <button class="modal-close" onclick="closeModal('v-modal')">✕</button>
+    </div>
+    <div class="grid-2">
+      <div class="form-group"><label class="form-label">Brand *</label><input class="form-input" id="f-brand" placeholder="Toyota"/></div>
+      <div class="form-group"><label class="form-label">Model *</label><input class="form-input" id="f-model" placeholder="Avanza"/></div>
+    </div>
+    <div class="grid-2">
+      <div class="form-group"><label class="form-label">Year *</label><input class="form-input" id="f-year" type="number" placeholder="2023"/></div>
+      <div class="form-group"><label class="form-label">Category *</label><select class="form-select" id="f-cat"><option>MPV</option><option>SUV</option><option>Hatchback</option><option>Sedan</option><option>Van</option><option>Pickup</option><option>Motorcycle</option><option>Luxury</option></select></div>
+    </div>
+    <div class="grid-2">
+      <div class="form-group"><label class="form-label">Price/Day (IDR) *</label><input class="form-input" id="f-price" type="number" placeholder="350000"/></div>
+      <div class="form-group"><label class="form-label">Seats</label><input class="form-input" id="f-seats" type="number" placeholder="5"/></div>
+    </div>
+    <div class="grid-2">
+      <div class="form-group"><label class="form-label">Transmission</label><select class="form-select" id="f-trans"><option>Manual</option><option>Automatic</option></select></div>
+      <div class="form-group"><label class="form-label">Fuel Type</label><select class="form-select" id="f-fuel"><option>Petrol</option><option>Diesel</option><option>Electric</option><option>Hybrid</option></select></div>
+    </div>
+    <div class="form-group"><label class="form-label">Location *</label><input class="form-input" id="f-loc" placeholder="Jakarta"/></div>
+    <div class="form-group"><label class="form-label">Description</label><input class="form-input" id="f-desc" placeholder="Short vehicle description"/></div>
+    <div class="modal-footer">
+      <button class="btn btn-gray" onclick="closeModal('v-modal')">Cancel</button>
+      <button class="btn btn-blue" onclick="saveVehicle()">💾 Save Vehicle</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal-overlay" id="del-modal">
+  <div class="modal-box" style="max-width:380px;text-align:center">
+    <div style="font-size:3rem;margin-bottom:12px">🗑️</div>
+    <div class="modal-title mb-2">Remove Vehicle?</div>
+    <p style="color:var(--text3);font-size:.9rem;margin-bottom:20px" id="del-msg">This cannot be undone.</p>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button class="btn btn-gray" onclick="closeModal('del-modal')">Cancel</button>
+      <button class="btn btn-red" onclick="confirmDelete()">🗑️ Remove</button>
+    </div>
+  </div>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal-overlay" id="book-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">📋 Booking Confirmation</div>
+      <button class="modal-close" onclick="closeModal('book-modal')">✕</button>
+    </div>
+    <div id="book-modal-content"></div>
+  </div>
+</div>
+
+<!-- Toasts -->
+<div class="toasts-container" id="toasts"></div>
 
 <script>
-  const BASE = window.location.origin;
-  const TOKEN = 'Bearer rentease-secret-2024';
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
+const BASE = window.location.origin;
+const TOKEN = 'Bearer rentease-secret-2024';
 
-  let allVehicles = [];
-  let allOwners   = [];
-  let editingVehicleId = null;
-  let deleteVehicleId  = null;
-  let availValue = true;
+let allVehicles = [];
+let allOwners   = [];
+let selectedCategory = '';
+let priceMax = 1500000;
+let editingVehicleId = null;
+let deleteVehicleId  = null;
 
-  const CATEGORY_COLORS = {
-    'mpv':'#6366f1','suv':'#8b5cf6','hatchback':'#06b6d4','sedan':'#0ea5e9',
-    'van':'#f59e0b','pickup':'#ef4444','motorcycle':'#10b981','luxury':'#f59e0b','default':'#6b7280'
-  };
-  const OWNER_COLORS = ['#6366f1','#10b981','#f59e0b','#ef4444','#06b6d4','#8b5cf6'];
+const CAT_ICONS = {MPV:'🚐',SUV:'🚙',Hatchback:'🚗',Sedan:'🚘',Van:'🚐',Pickup:'🛻',Motorcycle:'🏍️',Luxury:'🏎️'};
+const CAT_COLORS = {MPV:'#4f46e5',SUV:'#7c3aed',Hatchback:'#0ea5e9',Sedan:'#06b6d4',Van:'#f59e0b',Pickup:'#ef4444',Motorcycle:'#10b981',Luxury:'#d97706'};
+const LOC_ICONS = {Jakarta:'🏙️',Bandung:'🌄',Bali:'🏝️',Surabaya:'🌆',Yogyakarta:'🏛️',Medan:'🌿',Makassar:'⚓'};
 
-  // ── API helper ──────────────────────────────────────────────────────────────
-  async function api(path, opts={}) {
+// ═══════════════════════════════════════════════════════════════
+// API
+// ═══════════════════════════════════════════════════════════════
+async function api(path, opts={}) {
+  try {
     const r = await fetch(BASE+path,{headers:{'Content-Type':'application/json',...opts.headers},...opts});
     return r.json();
-  }
+  } catch(e) { return {success:false, data:[], count:0}; }
+}
 
-  // ── Load all data ───────────────────────────────────────────────────────────
-  async function loadAll() {
-    const [vr, or] = await Promise.all([api('/vehicles'), api('/owners')]);
-    allVehicles = vr.data || [];
-    allOwners   = or.data || [];
-    updateStats();
-    populateFilters();
-    renderVehicles(allVehicles);
-    renderOwners();
-  }
+async function loadAll() {
+  const [vr, or] = await Promise.all([api('/vehicles'), api('/owners')]);
+  allVehicles = vr.data || [];
+  allOwners   = or.data || [];
+  renderHomeVehicles();
+  renderVehiclesPage();
+  buildFilterOptions();
+  renderCustomerDash();
+  renderOwnerDash();
+  renderAdminDash();
+}
 
-  function updateStats() {
-    document.getElementById('s-vehicles').textContent = allVehicles.length;
-    document.getElementById('s-owners').textContent   = allOwners.length;
-    document.getElementById('s-avail').textContent    = allVehicles.filter(v=>v.available).length;
-    document.getElementById('s-cats').textContent     = new Set(allVehicles.map(v=>v.category)).size;
-  }
+// ═══════════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════════
+function goPage(name) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+name)?.classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  const map = {home:'Home',vehicles:'Vehicles',about:'About',contact:'Contact'};
+  document.querySelectorAll('.nav-link').forEach(l=>{ if(l.textContent===map[name]) l.classList.add('active'); });
+  window.scrollTo(0,0);
+  // Show different nav for dashboard pages
+  const dash = ['customer-dash','owner-dash','admin'].includes(name);
+  document.getElementById('nav-main-links').style.display = dash?'none':'flex';
+  document.getElementById('nav-actions-guest').classList.toggle('hidden', dash);
+  document.getElementById('nav-actions-user').classList.toggle('hidden', !dash);
+}
 
-  function populateFilters() {
-    const cats = [...new Set(allVehicles.map(v=>v.category))].sort();
-    const locs = [...new Set(allVehicles.map(v=>v.location))].sort();
-    document.getElementById('v-cat').innerHTML = '<option value="">All Categories</option>'+cats.map(c=>`<option>${c}</option>`).join('');
-    document.getElementById('v-loc').innerHTML = '<option value="">All Locations</option>'+locs.map(l=>`<option>${l}</option>`).join('');
-  }
+function heroSearch() {
+  const q = document.getElementById('hero-q').value;
+  const loc = document.getElementById('hero-loc').value;
+  if(q) document.getElementById('v-quick-search').value = q;
+  goPage('vehicles');
+  setTimeout(applyFilters, 100);
+}
 
-  // ── Render vehicles ─────────────────────────────────────────────────────────
-  function renderVehicles(list) {
-    const g = document.getElementById('v-grid');
-    if(!list.length){ g.innerHTML=`<div class="empty"><div class="empty-icon">🚫</div><p>No vehicles found</p></div>`; return; }
-    g.innerHTML = list.map(v => {
-      const color = CATEGORY_COLORS[v.category.toLowerCase()] || CATEGORY_COLORS.default;
-      const avail = v.available;
-      return `
-      <div class="v-card">
-        <div class="v-stripe" style="background:linear-gradient(90deg,${color},${color}55)"></div>
-        <div class="v-body">
-          <div class="v-category">${esc(v.category)}</div>
-          <div class="v-title">${esc(v.brand)} ${esc(v.model)}</div>
-          <div class="v-sub">📅 ${v.year} &nbsp;·&nbsp; 📍 ${esc(v.location)} &nbsp;·&nbsp; ⭐ ${v.rating||'N/A'}</div>
-          <div class="v-specs">
-            <span class="v-spec">⚙️ ${esc(v.transmission)}</span>
-            <span class="v-spec">⛽ ${esc(v.fuelType)}</span>
-            <span class="v-spec">💺 ${v.seats} seats</span>
-          </div>
-          <div class="v-footer">
-            <div>
-              <div class="v-price">IDR ${(v.pricePerDay||0).toLocaleString()}<span>/day</span></div>
-              <span class="badge ${avail?'badge-green':'badge-red'}">${avail?'✅ Available':'❌ Booked'}</span>
-            </div>
-            <div class="v-actions">
-              <button class="btn btn-ghost btn-icon" title="Edit" onclick="openEditVehicle(${v.id})">✏️</button>
-              <button class="btn btn-danger btn-icon" title="Delete" onclick="openDelete(${v.id},'${esc(v.brand+' '+v.model)}')">🗑️</button>
-            </div>
+function filterCategory(cat) {
+  selectedCategory = cat;
+  goPage('vehicles');
+  setTimeout(()=>{ applyFilters(); }, 100);
+}
+
+function liveSearch(q) {
+  if(document.getElementById('page-vehicles').classList.contains('active')){
+    document.getElementById('v-quick-search').value = q;
+    applyFilters();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// VEHICLE CARDS (shared render function)
+// ═══════════════════════════════════════════════════════════════
+function vehicleCardHTML(v, showFeatured=false) {
+  const color = CAT_COLORS[v.category] || '#6366f1';
+  const icon  = CAT_ICONS[v.category]  || '🚗';
+  const stars = '★'.repeat(Math.round(v.rating||4))+'☆'.repeat(5-Math.round(v.rating||4));
+  return `
+  <div class="vehicle-card" onclick="showDetail(${v.id})">
+    <div class="vc-img" style="background:linear-gradient(135deg,${color}18,${color}08)">
+      ${showFeatured ? '<div class="vc-featured"><span class="badge badge-blue">⭐ Featured</span></div>' : ''}
+      <span style="font-size:5.5rem">${icon}</span>
+    </div>
+    <div class="vc-body">
+      <div class="vc-name">${esc(v.brand)} ${esc(v.model)}</div>
+      <div class="vc-stars">
+        <span class="stars" style="font-size:.85rem">${stars}</span>
+        <span style="color:var(--text3);font-size:.8rem">${v.rating||4.0} (${Math.floor(Math.random()*200+50)} reviews)</span>
+      </div>
+      <div class="vc-price">$${Math.round((v.pricePerDay||350000)/15000)}<span> / day</span>
+        <span style="font-size:.72rem;margin-left:4px;color:var(--text3)">IDR ${(v.pricePerDay||0).toLocaleString()}</span>
+      </div>
+      <div class="vc-loc">${LOC_ICONS[v.location]||'📍'} ${esc(v.location)}</div>
+      <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+        <span class="badge badge-gray">⚙️ ${esc(v.transmission)}</span>
+        <span class="badge badge-gray">💺 ${v.seats} seats</span>
+        <span class="badge ${v.available?'badge-green':'badge-red'}">${v.available?'✅ Available':'❌ Booked'}</span>
+      </div>
+      <button class="btn btn-blue w-full vc-btn btn-sm" onclick="event.stopPropagation();showDetail(${v.id})">View Details</button>
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// HOME PAGE
+// ═══════════════════════════════════════════════════════════════
+function renderHomeVehicles() {
+  const grid = document.getElementById('home-vehicles-grid');
+  const featured = allVehicles.slice(0,6);
+  grid.innerHTML = featured.map((v,i)=>vehicleCardHTML(v,i<2)).join('') || '<p style="color:var(--text3)">Loading...</p>';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// VEHICLES PAGE
+// ═══════════════════════════════════════════════════════════════
+function buildFilterOptions() {
+  const cats = [...new Set(allVehicles.map(v=>v.category))].sort();
+  const locs = [...new Set(allVehicles.map(v=>v.location))].sort();
+  document.getElementById('filter-cats').innerHTML = cats.map(c=>
+    `<div class="filter-option"><label><input type="checkbox" class="f-cat" value="${c}" onchange="applyFilters()"/> ${CAT_ICONS[c]||'🚗'} ${c}</label><span class="filter-count">${allVehicles.filter(v=>v.category===c).length}</span></div>`
+  ).join('');
+  document.getElementById('filter-locs').innerHTML = locs.map(l=>
+    `<div class="filter-option"><label><input type="checkbox" class="f-loc" value="${l}" onchange="applyFilters()"/> ${LOC_ICONS[l]||'📍'} ${l}</label><span class="filter-count">${allVehicles.filter(v=>v.location===l).length}</span></div>`
+  ).join('');
+}
+
+function applyFilters() {
+  let results = [...allVehicles];
+  const q     = document.getElementById('v-quick-search')?.value?.toLowerCase() || '';
+  const sort  = document.getElementById('v-sort')?.value || 'default';
+  const availOnly = document.getElementById('f-avail')?.checked;
+  const selCats   = [...document.querySelectorAll('.f-cat:checked')].map(el=>el.value);
+  const selLocs   = [...document.querySelectorAll('.f-loc:checked')].map(el=>el.value);
+  const selTrans  = [...document.querySelectorAll('.f-trans:checked')].map(el=>el.value);
+
+  if(selectedCategory){ results = results.filter(v=>v.category===selectedCategory); }
+  if(selCats.length)  { results = results.filter(v=>selCats.includes(v.category)); }
+  if(selLocs.length)  { results = results.filter(v=>selLocs.includes(v.location)); }
+  if(selTrans.length) { results = results.filter(v=>selTrans.includes(v.transmission)); }
+  if(availOnly)       { results = results.filter(v=>v.available); }
+  if(q) results = results.filter(v=>(v.brand+' '+v.model+' '+v.description).toLowerCase().includes(q));
+  results = results.filter(v=>(v.pricePerDay||0)<=priceMax);
+
+  if(sort==='price-asc')  results.sort((a,b)=>a.pricePerDay-b.pricePerDay);
+  if(sort==='price-desc') results.sort((a,b)=>b.pricePerDay-a.pricePerDay);
+  if(sort==='rating')     results.sort((a,b)=>(b.rating||0)-(a.rating||0));
+  if(sort==='year')       results.sort((a,b)=>b.year-a.year);
+
+  renderVehiclesPage(results);
+}
+
+function updatePriceFilter(val) {
+  priceMax = parseInt(val);
+  document.getElementById('price-max-label').textContent = parseInt(val).toLocaleString();
+  applyFilters();
+}
+
+function clearFilters() {
+  selectedCategory = '';
+  document.querySelectorAll('.f-cat,.f-loc,.f-trans').forEach(el=>el.checked=false);
+  document.getElementById('f-avail').checked = false;
+  document.getElementById('v-quick-search').value = '';
+  document.getElementById('price-slider').value = 1500000;
+  priceMax = 1500000;
+  document.getElementById('price-max-label').textContent = '1,500,000';
+  applyFilters();
+}
+
+function renderVehiclesPage(list) {
+  list = list || allVehicles;
+  const grid = document.getElementById('vehicles-grid');
+  const countEl = document.getElementById('v-count-num');
+  if(countEl) countEl.textContent = `(${list.length} vehicles)`;
+  if(!list.length){ grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text3)"><div style="font-size:3rem">🔍</div><p style="margin-top:12px">No vehicles match your filters</p></div>'; return; }
+  grid.innerHTML = list.map(v=>vehicleCardHTML(v)).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// VEHICLE DETAIL
+// ═══════════════════════════════════════════════════════════════
+function showDetail(id) {
+  const v = allVehicles.find(x=>x.id===id);
+  if(!v) return;
+  document.getElementById('detail-breadcrumb').textContent = v.brand+' '+v.model;
+  const color = CAT_COLORS[v.category]||'#4f46e5';
+  const icon  = CAT_ICONS[v.category]||'🚗';
+  const stars = '★'.repeat(Math.round(v.rating||4))+'☆'.repeat(5-Math.round(v.rating||4));
+  document.getElementById('detail-content').innerHTML = `
+    <!-- Left -->
+    <div>
+      <div class="detail-gallery">
+        <div class="detail-main-img" style="background:linear-gradient(135deg,${color}15,${color}05)">
+          <span style="font-size:9rem">${icon}</span>
+        </div>
+        <div class="detail-thumbs">
+          ${[icon,icon,icon,icon].map((ic,i)=>`<div class="detail-thumb ${i===0?'active':''}">${ic}</div>`).join('')}
+        </div>
+      </div>
+      <div class="detail-tabs">
+        <div class="detail-tab active">Details</div>
+        <div class="detail-tab">Reviews</div>
+        <div class="detail-tab">Location</div>
+      </div>
+      <div class="detail-name">${esc(v.brand)} ${esc(v.model)}</div>
+      <div class="detail-stars">
+        <span class="stars">${stars}</span>
+        <span style="font-size:.88rem;color:var(--text3)">${v.rating} (${Math.floor(Math.random()*200+50)} reviews)</span>
+        <span class="badge ${v.available?'badge-green':'badge-red'}" style="margin-left:8px">${v.available?'✅ Available':'❌ Not Available'}</span>
+      </div>
+      <div class="detail-price">$${Math.round((v.pricePerDay||0)/15000)} <span>/ day &nbsp;·&nbsp; IDR ${(v.pricePerDay||0).toLocaleString()}</span></div>
+      <div class="detail-specs">
+        <div class="detail-spec"><span class="detail-spec-icon">💺</span><div><div class="detail-spec-label">Seats</div><div class="detail-spec-value">${v.seats} Passengers</div></div></div>
+        <div class="detail-spec"><span class="detail-spec-icon">⚙️</span><div><div class="detail-spec-label">Transmission</div><div class="detail-spec-value">${esc(v.transmission)}</div></div></div>
+        <div class="detail-spec"><span class="detail-spec-icon">⛽</span><div><div class="detail-spec-label">Fuel Type</div><div class="detail-spec-value">${esc(v.fuelType)}</div></div></div>
+        <div class="detail-spec"><span class="detail-spec-icon">📅</span><div><div class="detail-spec-label">Year</div><div class="detail-spec-value">${v.year}</div></div></div>
+        <div class="detail-spec"><span class="detail-spec-icon">📍</span><div><div class="detail-spec-label">Location</div><div class="detail-spec-value">${esc(v.location)}</div></div></div>
+        <div class="detail-spec"><span class="detail-spec-icon">🏷️</span><div><div class="detail-spec-label">Category</div><div class="detail-spec-value">${esc(v.category)}</div></div></div>
+      </div>
+      <p class="detail-desc">${esc(v.description||'Premium quality vehicle available for rent. Well-maintained and regularly serviced for your safety and comfort.')}</p>
+    </div>
+    <!-- Right: Booking Card -->
+    <div>
+      <div class="booking-card">
+        <div class="booking-card-title">📋 Book This Vehicle</div>
+        <div class="form-group"><label class="form-label">Pick-up Date</label><input class="form-input" type="date" id="book-pickup"/></div>
+        <div class="form-group"><label class="form-label">Return Date</label><input class="form-input" type="date" id="book-return" onchange="calcPrice(${v.pricePerDay})"/></div>
+        <div id="price-breakdown" style="margin:14px 0;padding:14px;background:var(--gray5);border-radius:10px;font-size:.85rem;display:none">
+          <div class="booking-price-row"><span>Daily Rate</span><span>IDR ${(v.pricePerDay||0).toLocaleString()}</span></div>
+          <div class="booking-price-row"><span id="days-label">Days</span><span id="days-price">IDR 0</span></div>
+          <div class="booking-price-row"><span>Service Fee</span><span>IDR 50,000</span></div>
+          <div class="booking-price-row total"><span>Total</span><span class="booking-total-amount" id="total-price">IDR 0</span></div>
+        </div>
+        <button class="btn btn-gray w-full mb-2" onclick="calcPrice(${v.pricePerDay})">💰 Calculate Price</button>
+        <button class="btn btn-blue w-full btn-lg" onclick="openBooking(${v.id},'${esc(v.brand+' '+v.model)}',${v.pricePerDay})" ${!v.available?'disabled style="opacity:.5;cursor:not-allowed"':''}>
+          ${v.available?'🚗 Book Now':'❌ Not Available'}
+        </button>
+        <p style="font-size:.74rem;color:var(--text3);text-align:center;margin-top:10px">Free cancellation within 24 hours</p>
+      </div>
+    </div>`;
+  goPage('detail');
+}
+
+function calcPrice(pricePerDay) {
+  const p = document.getElementById('book-pickup')?.value;
+  const r = document.getElementById('book-return')?.value;
+  if(!p||!r) return;
+  const days = Math.max(1,Math.round((new Date(r)-new Date(p))/(1000*60*60*24)));
+  const base = pricePerDay * days;
+  const total = base + 50000;
+  document.getElementById('days-label').textContent = `${days} day${days>1?'s':''}`;
+  document.getElementById('days-price').textContent = `IDR ${base.toLocaleString()}`;
+  document.getElementById('total-price').textContent = `IDR ${total.toLocaleString()}`;
+  document.getElementById('price-breakdown').style.display='block';
+}
+
+function openBooking(id, name, price) {
+  const p = document.getElementById('book-pickup')?.value;
+  const r = document.getElementById('book-return')?.value;
+  if(!p||!r) { toast('⚠️ Please select pickup and return dates','error'); return; }
+  const days = Math.max(1,Math.round((new Date(r)-new Date(p))/(1000*60*60*24)));
+  document.getElementById('book-modal-content').innerHTML = `
+    <div style="text-align:center;margin-bottom:16px"><span style="font-size:3rem">✅</span></div>
+    <div class="card p-4 mb-3"><div class="font-bold mb-2">${name}</div><div style="font-size:.85rem;color:var(--text2)">${p} → ${r} · ${days} days</div></div>
+    <div class="booking-price-row"><span class="text-gray text-sm">Total</span><span class="font-bold text-blue" style="font-size:1.1rem">IDR ${((price*days)+50000).toLocaleString()}</span></div>
+    <div class="modal-footer">
+      <button class="btn btn-gray" onclick="closeModal('book-modal')">Cancel</button>
+      <button class="btn btn-blue" onclick="closeModal('book-modal');toast('🎉 Booking confirmed!','success')">Confirm Booking</button>
+    </div>`;
+  document.getElementById('book-modal').classList.add('open');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CUSTOMER DASHBOARD
+// ═══════════════════════════════════════════════════════════════
+function renderCustomerDash() { showDashTab('c-overview'); }
+
+function showDashTab(tab) {
+  document.querySelectorAll('#page-customer-dash .dash-nav-item').forEach(el=>el.classList.remove('active'));
+  event?.target?.classList?.add('active');
+  const c = document.getElementById('customer-dash-content');
+  if(tab==='c-overview') c.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+      <div><h2 style="font-size:1.3rem;font-weight:800">Customer Dashboard</h2><p style="color:var(--text3);font-size:.88rem">Welcome back, John Doe 👋</p></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="nav-avatar">JD</div></div>
+    </div>
+    <div class="stat-cards">
+      <div class="stat-card"><div class="stat-card-header"><div class="stat-card-label">Total Bookings</div><div class="stat-card-icon" style="background:#eff6ff;color:var(--blue)">📋</div></div><div class="stat-card-num">3</div><div class="stat-card-sub">2 active, 1 completed</div></div>
+      <div class="stat-card"><div class="stat-card-header"><div class="stat-card-label">My Rating</div><div class="stat-card-icon" style="background:#fef3c7;color:#d97706">⭐</div></div><div class="stat-card-num">4.8</div><div class="stat-card-sub">As a customer</div></div>
+      <div class="stat-card"><div class="stat-card-header"><div class="stat-card-label">Wishlist Items</div><div class="stat-card-icon" style="background:#fee2e2;color:#dc2626">❤️</div></div><div class="stat-card-num">5</div><div class="stat-card-sub">Saved vehicles</div></div>
+      <div class="stat-card"><div class="stat-card-header"><div class="stat-card-label">Notifications</div><div class="stat-card-icon" style="background:#ede9fe;color:#7c3aed">🔔</div></div><div class="stat-card-num">2</div><div class="stat-card-sub">Unread</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:20px">
+      <div class="card p-4">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div class="font-bold">Recent Bookings</div><span class="text-blue text-sm" style="cursor:pointer">View All →</span>
+        </div>
+        <table class="data-table">
+          <tr><th>Vehicle</th><th>Dates</th><th>Status</th><th>Amount</th></tr>
+          <tr><td><div class="font-medium">Toyota Avanza</div><div class="text-xs text-gray">MPV · Jakarta</div></td><td class="text-sm">Nov 20–23, 2025</td><td><span class="badge badge-green">Confirmed</span></td><td class="font-semibold">IDR 1,050,000</td></tr>
+          <tr><td><div class="font-medium">Honda Brio</div><div class="text-xs text-gray">Hatchback · Bandung</div></td><td class="text-sm">Dec 1–3, 2025</td><td><span class="badge badge-yellow">Pending</span></td><td class="font-semibold">IDR 600,000</td></tr>
+          <tr><td><div class="font-medium">Yamaha NMAX</div><div class="text-xs text-gray">Motorcycle · Bali</div></td><td class="text-sm">Nov 10–12, 2025</td><td><span class="badge badge-gray">Completed</span></td><td class="font-semibold">IDR 200,000</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="card p-4">
+          <div class="font-bold mb-3">⚡ Quick Actions</div>
+          <div class="quick-actions">
+            <div class="quick-action-btn" onclick="goPage('vehicles')">🔍 Search Vehicles</div>
+            <div class="quick-action-btn">❤️ View Wishlist</div>
+            <div class="quick-action-btn">💬 Contact Support</div>
           </div>
         </div>
-      </div>`;
-    }).join('');
-  }
+      </div>
+    </div>`;
 
-  // ── Filter vehicles ─────────────────────────────────────────────────────────
-  function filterVehicles() {
-    const q     = document.getElementById('v-search').value.toLowerCase();
-    const cat   = document.getElementById('v-cat').value.toLowerCase();
-    const loc   = document.getElementById('v-loc').value.toLowerCase();
-    const avail = document.getElementById('v-avail').value;
-    let r = allVehicles;
-    if(q)     r = r.filter(v=>(v.brand+' '+v.model+' '+v.description).toLowerCase().includes(q));
-    if(cat)   r = r.filter(v=>v.category.toLowerCase()===cat);
-    if(loc)   r = r.filter(v=>v.location.toLowerCase()===loc);
-    if(avail) r = r.filter(v=>String(v.available)===avail);
-    renderVehicles(r);
-  }
+  if(tab==='c-bookings') c.innerHTML = `
+    <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:20px">📋 My Bookings</h2>
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+      ${['All','Pending','Confirmed','Ongoing','Completed','Cancelled'].map((s,i)=>`<span class="badge ${i===0?'badge-blue':'badge-gray'}" style="cursor:pointer;padding:6px 14px">${s}</span>`).join('')}
+    </div>
+    <div class="card" style="overflow:hidden">
+      <table class="data-table"><tr><th>Vehicle</th><th>Owner</th><th>Dates</th><th>Total</th><th>Status</th><th>Action</th></tr>
+      <tr><td><div class="font-medium">Toyota Avanza</div><div class="text-xs text-gray">MPV · Jakarta</div></td><td class="text-sm">Budi Santoso</td><td class="text-sm">Nov 20–23</td><td>IDR 1,050,000</td><td><span class="badge badge-green">Confirmed</span></td><td><button class="btn btn-gray btn-xs">Details</button></td></tr>
+      <tr><td><div class="font-medium">Honda Brio</div><div class="text-xs text-gray">Hatchback</div></td><td class="text-sm">Siti Rahayu</td><td class="text-sm">Dec 1–3</td><td>IDR 600,000</td><td><span class="badge badge-yellow">Pending</span></td><td><button class="btn btn-red btn-xs">Cancel</button></td></tr>
+      </table>
+    </div>`;
+}
 
-  // ── Render owners ───────────────────────────────────────────────────────────
-  function renderOwners() {
-    const q = document.getElementById('o-search').value.toLowerCase();
-    const g = document.getElementById('o-grid');
-    const list = q ? allOwners.filter(o=>(o.name+' '+o.city).toLowerCase().includes(q)) : allOwners;
-    if(!list.length){ g.innerHTML=`<div class="empty"><div class="empty-icon">👤</div><p>No owners found</p></div>`; return; }
-    g.innerHTML = list.map((o,i)=>`
-      <div class="o-card">
-        <div class="o-avatar" style="background:${OWNER_COLORS[i%OWNER_COLORS.length]}22;color:${OWNER_COLORS[i%OWNER_COLORS.length]};border:2px solid ${OWNER_COLORS[i%OWNER_COLORS.length]}44">
-          ${o.name.charAt(0)}
+// ═══════════════════════════════════════════════════════════════
+// OWNER DASHBOARD
+// ═══════════════════════════════════════════════════════════════
+function renderOwnerDash() { showOwnerTab('o-overview'); }
+
+function showOwnerTab(tab) {
+  document.querySelectorAll('#page-owner-dash .dash-nav-item').forEach(el=>el.classList.remove('active'));
+  event?.target?.classList?.add('active');
+  const c = document.getElementById('owner-dash-content');
+  if(tab==='o-overview') c.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+      <div><h2 style="font-size:1.3rem;font-weight:800">Owner Dashboard</h2><p style="color:var(--text3);font-size:.88rem">Ahmad Rizki · Vehicle Owner ⭐</p></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="nav-avatar" style="background:var(--green)">AR</div></div>
+    </div>
+    <div class="stat-cards">
+      <div class="stat-card"><div class="stat-card-header"><div class="stat-card-label">My Vehicles</div><div class="stat-card-icon" style="background:#eff6ff;color:var(--blue)">🚗</div></div><div class="stat-card-num">5</div><div class="stat-card-sub">3 available</div><div class="stat-card-trend trend-up">↑ 1 this month</div></div>
+      <div class="stat-card"><div class="stat-card-header"><div class="stat-card-label">Total Bookings</div><div class="stat-card-icon" style="background:#dcfce7;color:var(--green)">📋</div></div><div class="stat-card-num">12</div><div class="stat-card-sub">3 pending approval</div></div>
+      <div class="stat-card"><div class="stat-card-header"><div class="stat-card-label">Total Earnings</div><div class="stat-card-icon" style="background:#fef3c7;color:#d97706">💰</div></div><div class="stat-card-num" style="font-size:1.3rem">$8,750</div><div class="stat-card-sub">IDR 131,250,000</div><div class="stat-card-trend trend-up">↑ 12% this month</div></div>
+      <div class="stat-card"><div class="stat-card-header"><div class="stat-card-label">Rating</div><div class="stat-card-icon" style="background:#fef3c7;color:#d97706">⭐</div></div><div class="stat-card-num">4.7</div><div class="stat-card-sub">Based on 48 reviews</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div class="chart-container">
+        <div class="font-bold">📈 Earnings Overview (IDR)</div>
+        <div class="chart-bars">
+          ${[40,60,45,80,70,90,75].map((h,i)=>{
+            const months=['Jan','Feb','Mar','Apr','May','Jun','Jul'];
+            return `<div class="chart-bar-wrap"><div class="chart-bar" style="height:${h}%"></div><div class="chart-label">${months[i]}</div></div>`;
+          }).join('')}
         </div>
-        <div class="o-info">
-          <div class="o-name">${esc(o.name)}</div>
-          <div class="o-city">📍 ${esc(o.city)} &nbsp;·&nbsp; ⭐ ${o.rating||'N/A'}</div>
-          <div class="o-tags">
-            <span class="o-tag">🚗 ${o.totalVehicles} vehicles</span>
-            <span class="o-tag">📅 Since ${o.joinedYear}</span>
-            <span class="o-tag ${o.verified?'badge-green':'badge-yellow'}">${o.verified?'✅ Verified':'⏳ Pending'}</span>
+      </div>
+      <div class="card p-4">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px"><div class="font-bold">Recent Bookings</div><span class="text-blue text-sm" style="cursor:pointer">View All →</span></div>
+        <div class="activity-item"><div class="activity-icon" style="background:var(--blue-light);color:var(--blue)">🚗</div><div class="activity-content"><div class="activity-text"><strong>Honda Jazz</strong> — John Doe<br/>Nov 19–21 · IDR 600,000</div><div style="margin-top:4px"><span class="badge badge-green">Confirmed</span></div></div><div class="activity-time">2m ago</div></div>
+        <div class="activity-item"><div class="activity-icon" style="background:var(--yellow-light);color:var(--yellow)">🚙</div><div class="activity-content"><div class="activity-text"><strong>Toyota Fortuner</strong> — Jane Smith<br/>Nov 18–20 · IDR 1,300,000</div><div style="margin-top:4px"><span class="badge badge-yellow">Pending</span></div></div><div class="activity-time">1h ago</div></div>
+      </div>
+    </div>`;
+
+  if(tab==='o-vehicles') {
+    const myVehicles = allVehicles.filter((v,i)=>i<5);
+    c.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <h2 style="font-size:1.3rem;font-weight:800">🚗 My Vehicles</h2>
+      <button class="btn btn-blue btn-sm" onclick="openAddVehicle()">➕ Add Vehicle</button>
+    </div>
+    <div class="vehicles-grid">${myVehicles.map(v=>vehicleCardHTML(v)).join('')}</div>`;
+  }
+
+  if(tab==='o-requests') c.innerHTML = `
+    <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:20px">📨 Booking Requests</h2>
+    <div class="card" style="overflow:hidden">
+      <table class="data-table"><tr><th>Customer</th><th>Vehicle</th><th>Dates</th><th>Total</th><th>Actions</th></tr>
+      <tr><td><div class="font-medium">Jane Smith</div><div class="text-xs text-gray">★ 4.9 customer</div></td><td>Toyota Fortuner</td><td class="text-sm">Nov 18–20</td><td class="font-semibold">IDR 1,300,000</td><td><div style="display:flex;gap:6px"><button class="btn btn-green btn-xs" onclick="toast('✅ Booking accepted!','success')">Accept</button><button class="btn btn-red btn-xs" onclick="toast('❌ Booking rejected','error')">Reject</button></div></td></tr>
+      <tr><td><div class="font-medium">Alex Johnson</div><div class="text-xs text-gray">★ 4.5 customer</div></td><td>Honda Jazz</td><td class="text-sm">Nov 25–27</td><td class="font-semibold">IDR 600,000</td><td><div style="display:flex;gap:6px"><button class="btn btn-green btn-xs" onclick="toast('✅ Booking accepted!','success')">Accept</button><button class="btn btn-red btn-xs">Reject</button></div></td></tr>
+      </table>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ADMIN DASHBOARD
+// ═══════════════════════════════════════════════════════════════
+function renderAdminDash() { showAdminTab('a-overview'); }
+
+function showAdminTab(tab) {
+  document.querySelectorAll('#page-admin .dash-nav-item').forEach(el=>el.classList.remove('active'));
+  event?.target?.classList?.add('active');
+  const c = document.getElementById('admin-dash-content');
+  if(tab==='a-overview') c.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+      <div><h2 style="font-size:1.3rem;font-weight:800">Admin Panel</h2><p style="color:var(--text3);font-size:.88rem">Platform Overview</p></div>
+      <div style="display:flex;align-items:center;gap:8px"><div class="nav-avatar" style="background:#ef4444">A</div><span class="font-semibold text-sm">Admin</span></div>
+    </div>
+    <div class="stat-cards">
+      <div class="stat-card"><div class="stat-card-header"><div class="stat-card-label">Total Customers</div><div class="stat-card-icon" style="background:#eff6ff;color:var(--blue)">👥</div></div><div class="stat-card-num">1,250</div><div class="stat-card-trend trend-up">↑ 8% this month</div></div>
+      <div class="stat-card"><div class="stat-card-header"><div class="stat-card-label">Vehicle Owners</div><div class="stat-card-icon" style="background:#dcfce7;color:var(--green)">🏢</div></div><div class="stat-card-num">350</div><div class="stat-card-trend trend-up">↑ 12 new owners</div></div>
+      <div class="stat-card"><div class="stat-card-header"><div class="stat-card-label">Total Vehicles</div><div class="stat-card-icon" style="background:#fef3c7;color:#d97706)">🚗</div></div><div class="stat-card-num">2,800</div><div class="stat-card-trend trend-up">↑ 45 this week</div></div>
+      <div class="stat-card"><div class="stat-card-header"><div class="stat-card-label">Total Bookings</div><div class="stat-card-icon" style="background:#ede9fe;color:#7c3aed">📋</div></div><div class="stat-card-num">1,980</div><div class="stat-card-trend trend-up">↑ 15% growth</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div class="chart-container">
+        <div class="font-bold mb-3">📊 Platform Statistics</div>
+        <div style="display:flex;align-items:center;gap:24px">
+          <div class="donut"><div class="donut-label">60%</div></div>
+          <div class="donut-legend">
+            <div class="donut-legend-item"><div class="donut-legend-dot" style="background:var(--blue)"></div><span class="text-sm">Confirmed · 60%</span></div>
+            <div class="donut-legend-item"><div class="donut-legend-dot" style="background:var(--green)"></div><span class="text-sm">Completed · 20%</span></div>
+            <div class="donut-legend-item"><div class="donut-legend-dot" style="background:var(--red)"></div><span class="text-sm">Cancelled · 12%</span></div>
+            <div class="donut-legend-item"><div class="donut-legend-dot" style="background:var(--yellow)"></div><span class="text-sm">Pending · 8%</span></div>
           </div>
         </div>
-      </div>`).join('');
+      </div>
+      <div class="card p-4">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><div class="font-bold">Recent Activities</div><span class="text-blue text-sm" style="cursor:pointer">View All →</span></div>
+        <div class="activity-item"><div class="activity-icon" style="background:var(--blue-light);color:var(--blue)">🚗</div><div class="activity-content"><div class="activity-text">New vehicle listed by <strong>Ahmad Rizki</strong></div><div class="activity-time">2m ago</div></div></div>
+        <div class="activity-item"><div class="activity-icon" style="background:var(--green-light);color:var(--green)">✅</div><div class="activity-content"><div class="activity-text">Booking confirmed for <strong>Toyota Avanza</strong></div><div class="activity-time">5m ago</div></div></div>
+        <div class="activity-item"><div class="activity-icon" style="background:var(--purple-light);color:var(--purple)">👤</div><div class="activity-content"><div class="activity-text">New owner registered: <strong>Budi Santoso</strong></div><div class="activity-time">10m ago</div></div></div>
+        <div class="activity-item"><div class="activity-icon" style="background:var(--yellow-light);color:var(--yellow)">📋</div><div class="activity-content"><div class="activity-text">New booking request for <strong>Honda CR-V</strong></div><div class="activity-time">15m ago</div></div></div>
+      </div>
+    </div>`;
+
+  if(tab==='a-customers') c.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <h2 style="font-size:1.3rem;font-weight:800">👥 Customer Management</h2>
+      <input class="form-input" style="max-width:220px;padding:8px 12px;font-size:.85rem" placeholder="🔍 Search customers..."/>
+    </div>
+    <div class="card" style="overflow:hidden">
+      <table class="data-table"><tr><th>Customer</th><th>Email</th><th>Bookings</th><th>Rating</th><th>Status</th><th>Actions</th></tr>
+      <tr><td><div class="font-medium">John Doe</div><div class="text-xs text-gray">Joined Nov 2024</div></td><td class="text-sm">john@email.com</td><td>3</td><td>⭐ 4.8</td><td><span class="badge badge-green">Active</span></td><td><button class="btn btn-gray btn-xs">View</button></td></tr>
+      <tr><td><div class="font-medium">Jane Smith</div><div class="text-xs text-gray">Joined Oct 2024</div></td><td class="text-sm">jane@email.com</td><td>7</td><td>⭐ 4.9</td><td><span class="badge badge-green">Active</span></td><td><button class="btn btn-gray btn-xs">View</button></td></tr>
+      </table>
+    </div>`;
+
+  if(tab==='a-vehicles') {
+    c.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <h2 style="font-size:1.3rem;font-weight:800">🚗 Vehicle Management</h2>
+      <button class="btn btn-blue btn-sm" onclick="openAddVehicle()">➕ Add Vehicle</button>
+    </div>
+    <div class="card" style="overflow:hidden">
+      <table class="data-table"><tr><th>Vehicle</th><th>Owner</th><th>Category</th><th>Price/Day</th><th>Status</th><th>Actions</th></tr>
+      ${allVehicles.slice(0,8).map(v=>`
+      <tr>
+        <td><div class="font-medium">${esc(v.brand)} ${esc(v.model)}</div><div class="text-xs text-gray">${v.year} · ${esc(v.location)}</div></td>
+        <td class="text-sm">Owner ${v.ownerId||1}</td>
+        <td><span class="badge badge-blue">${esc(v.category)}</span></td>
+        <td>IDR ${(v.pricePerDay||0).toLocaleString()}</td>
+        <td><span class="badge ${v.available?'badge-green':'badge-red'}">${v.available?'Available':'Booked'}</span></td>
+        <td><div style="display:flex;gap:4px"><button class="btn btn-gray btn-xs" onclick="openEditVehicle(${v.id})">✏️</button><button class="btn btn-red btn-xs" onclick="openDeleteV(${v.id},'${esc(v.brand+' '+v.model)}')">🗑️</button></div></td>
+      </tr>`).join('')}
+      </table>
+    </div>`;
   }
+}
 
-  // ── Tabs ────────────────────────────────────────────────────────────────────
-  function switchTab(name) {
-    ['vehicles','owners','api'].forEach(t=>{
-      document.getElementById('tab-'+t).style.display = t===name?'block':'none';
-    });
-    document.querySelectorAll('.tab').forEach((el,i)=>{
-      el.classList.toggle('active',['vehicles','owners','api'][i]===name);
-    });
-  }
+// ═══════════════════════════════════════════════════════════════
+// VEHICLE CRUD
+// ═══════════════════════════════════════════════════════════════
+function openAddVehicle() {
+  editingVehicleId=null;
+  document.getElementById('v-modal-title').textContent='🚗 Add New Vehicle';
+  ['f-brand','f-model','f-year','f-price','f-seats','f-loc','f-desc'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('v-modal').classList.add('open');
+}
+function openEditVehicle(id) {
+  const v = allVehicles.find(x=>x.id===id); if(!v) return;
+  editingVehicleId=id;
+  document.getElementById('v-modal-title').textContent='✏️ Edit Vehicle';
+  document.getElementById('f-brand').value=v.brand;document.getElementById('f-model').value=v.model;
+  document.getElementById('f-year').value=v.year;document.getElementById('f-price').value=v.pricePerDay;
+  document.getElementById('f-seats').value=v.seats;document.getElementById('f-loc').value=v.location;
+  document.getElementById('f-desc').value=v.description||'';document.getElementById('f-cat').value=v.category;
+  document.getElementById('f-trans').value=v.transmission;document.getElementById('f-fuel').value=v.fuelType;
+  document.getElementById('v-modal').classList.add('open');
+}
+function openDeleteV(id,name) { deleteVehicleId=id; document.getElementById('del-msg').textContent=`"${name}" will be permanently removed.`; document.getElementById('del-modal').classList.add('open'); }
 
-  // ── Modals ──────────────────────────────────────────────────────────────────
-  function openModal(id){document.getElementById(id).classList.add('open')}
-  function closeModal(id){document.getElementById(id).classList.remove('open')}
+async function saveVehicle() {
+  const body={brand:document.getElementById('f-brand').value.trim(),model:document.getElementById('f-model').value.trim(),year:parseInt(document.getElementById('f-year').value),category:document.getElementById('f-cat').value,pricePerDay:parseInt(document.getElementById('f-price').value),seats:parseInt(document.getElementById('f-seats').value)||5,transmission:document.getElementById('f-trans').value,fuelType:document.getElementById('f-fuel').value,location:document.getElementById('f-loc').value.trim(),description:document.getElementById('f-desc').value.trim(),available:true};
+  if(!body.brand||!body.model||!body.year||!body.pricePerDay||!body.location){toast('⚠️ Fill all required fields','error');return}
+  const r=editingVehicleId?await api('/vehicles/'+editingVehicleId,{method:'PUT',body:JSON.stringify(body),headers:{Authorization:TOKEN}}):await api('/vehicles',{method:'POST',body:JSON.stringify(body),headers:{Authorization:TOKEN}});
+  if(r.success){closeModal('v-modal');await loadAll();toast(editingVehicleId?'✅ Vehicle updated!':'✅ Vehicle added!','success')}
+  else toast('❌ '+(r.message||'Error'),'error');
+}
 
-  function openAddVehicle() {
-    editingVehicleId=null; availValue=true;
-    document.getElementById('v-modal-title').textContent='🚗 Add New Vehicle';
-    ['f-brand','f-model','f-year','f-price','f-seats','f-loc','f-desc'].forEach(id=>document.getElementById(id).value='');
-    document.getElementById('f-avail-toggle').className='toggle on';
-    openModal('v-modal');
-  }
+async function confirmDelete() {
+  const r=await api('/vehicles/'+deleteVehicleId,{method:'DELETE',headers:{Authorization:TOKEN}});
+  if(r.success){closeModal('del-modal');await loadAll();toast('🗑️ Vehicle removed','success')}
+  else toast('❌ '+(r.message||'Error'),'error');
+}
 
-  function openEditVehicle(id) {
-    const v = allVehicles.find(x=>x.id===id); if(!v) return;
-    editingVehicleId=id; availValue=v.available;
-    document.getElementById('v-modal-title').textContent='✏️ Edit Vehicle';
-    document.getElementById('f-brand').value=v.brand;
-    document.getElementById('f-model').value=v.model;
-    document.getElementById('f-year').value=v.year;
-    document.getElementById('f-price').value=v.pricePerDay;
-    document.getElementById('f-seats').value=v.seats;
-    document.getElementById('f-loc').value=v.location;
-    document.getElementById('f-desc').value=v.description||'';
-    document.getElementById('f-cat').value=v.category;
-    document.getElementById('f-trans').value=v.transmission;
-    document.getElementById('f-fuel').value=v.fuelType;
-    document.getElementById('f-avail-toggle').className='toggle '+(availValue?'on':'');
-    openModal('v-modal');
-  }
+// ═══════════════════════════════════════════════════════════════
+// MODALS / TOAST / UTILS
+// ═══════════════════════════════════════════════════════════════
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')}));
 
-  function toggleAvail(){availValue=!availValue;document.getElementById('f-avail-toggle').className='toggle '+(availValue?'on':'')}
+function toast(msg,type='success'){
+  const el=document.createElement('div');el.className=`toast-item toast-${type}`;el.textContent=msg;
+  document.getElementById('toasts').appendChild(el);setTimeout(()=>el.remove(),3200);
+}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 
-  async function saveVehicle() {
-    const body={
-      brand: document.getElementById('f-brand').value.trim(),
-      model: document.getElementById('f-model').value.trim(),
-      year:  parseInt(document.getElementById('f-year').value),
-      category: document.getElementById('f-cat').value,
-      pricePerDay: parseInt(document.getElementById('f-price').value),
-      seats: parseInt(document.getElementById('f-seats').value)||5,
-      transmission: document.getElementById('f-trans').value,
-      fuelType: document.getElementById('f-fuel').value,
-      location: document.getElementById('f-loc').value.trim(),
-      description: document.getElementById('f-desc').value.trim(),
-      available: availValue,
-    };
-    if(!body.brand||!body.model||!body.year||!body.pricePerDay||!body.location){
-      toast('⚠️ Please fill in all required fields','error'); return;
-    }
-    try {
-      const r = editingVehicleId
-        ? await api('/vehicles/'+editingVehicleId,{method:'PUT',body:JSON.stringify(body),headers:{Authorization:TOKEN}})
-        : await api('/vehicles',{method:'POST',body:JSON.stringify(body),headers:{Authorization:TOKEN}});
-      if(r.success){closeModal('v-modal');await loadAll();toast(editingVehicleId?'✅ Vehicle updated!':'✅ Vehicle added!','success')}
-      else toast('❌ '+(r.message||'Error'),'error');
-    }catch(e){toast('❌ Request failed','error')}
-  }
+// ═══════════════════════════════════════════════════════════════
+// NAVBAR LINKS — add admin shortcut
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('keydown', e=>{
+  if(e.key==='a'&&e.ctrlKey&&e.shiftKey){ e.preventDefault(); goPage('admin'); }
+  if(e.key==='o'&&e.ctrlKey&&e.shiftKey){ e.preventDefault(); goPage('owner-dash'); }
+});
 
-  function openDelete(id,name){deleteVehicleId=id;document.getElementById('del-msg').textContent=`"${name}" will be permanently removed.`;openModal('del-modal')}
-  async function confirmDelete(){
-    try{
-      const r=await api('/vehicles/'+deleteVehicleId,{method:'DELETE',headers:{Authorization:TOKEN}});
-      if(r.success){closeModal('del-modal');await loadAll();toast('🗑️ Vehicle removed','success')}
-      else toast('❌ '+(r.message||'Error'),'error');
-    }catch(e){toast('❌ Request failed','error')}
-  }
-
-  // ── Owner modal ─────────────────────────────────────────────────────────────
-  function openAddOwner(){['of-name','of-phone','of-email','of-city','of-bio'].forEach(id=>document.getElementById(id).value='');openModal('o-modal')}
-  async function saveOwner(){
-    const body={name:document.getElementById('of-name').value.trim(),phone:document.getElementById('of-phone').value.trim(),email:document.getElementById('of-email').value.trim(),city:document.getElementById('of-city').value.trim(),bio:document.getElementById('of-bio').value.trim()};
-    if(!body.name||!body.phone||!body.email||!body.city){toast('⚠️ Please fill in all required fields','error');return}
-    try{const r=await api('/owners',{method:'POST',body:JSON.stringify(body),headers:{Authorization:TOKEN}});if(r.success){closeModal('o-modal');await loadAll();toast('✅ Owner registered!','success')}else toast('❌ '+(r.message||'Error'),'error')}catch(e){toast('❌ Request failed','error')}
-  }
-
-  // ── Toast ───────────────────────────────────────────────────────────────────
-  function toast(msg,type='success'){const el=document.createElement('div');el.className=`toast ${type}`;el.textContent=msg;document.getElementById('toasts').appendChild(el);setTimeout(()=>el.remove(),3200)}
-
-  // ── Escape HTML ─────────────────────────────────────────────────────────────
-  function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-
-  // ── Close on overlay click ──────────────────────────────────────────────────
-  document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')}));
-
-  // ── Init ────────────────────────────────────────────────────────────────────
-  loadAll();
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+loadAll();
 </script>
 </body>
 </html>
