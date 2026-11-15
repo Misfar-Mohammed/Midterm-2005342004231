@@ -1001,13 +1001,13 @@ ul{list-style:none}
     <aside class="dash-sidebar">
       <div class="dash-nav">
         <div class="dash-nav-section">
-          <div class="dash-nav-link active" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Bookings<span class="nav-link-badge">2</span></div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>Wishlist<span class="nav-link-badge">5</span></div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>My Reviews</div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>Notifications<span class="nav-link-badge">2</span></div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M4.93 19.07l1.41-1.41M19.07 19.07l-1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>Support</div>
+          <div class="dash-nav-link active" onclick="showCustomerPanel('dashboard',this)"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
+          <div class="dash-nav-link" onclick="showCustomerPanel('bookings',this)"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Bookings<span class="nav-link-badge">2</span></div>
+          <div class="dash-nav-link" onclick="showCustomerPanel('wishlist',this)"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>Wishlist<span class="nav-link-badge" id="cust-wl-badge">5</span></div>
+          <div class="dash-nav-link" onclick="showCustomerPanel('reviews',this)"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>My Reviews</div>
+          <div class="dash-nav-link" onclick="showCustomerPanel('profile',this)"><svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</div>
+          <div class="dash-nav-link" onclick="showCustomerPanel('notifications',this)"><svg viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>Notifications<span class="nav-link-badge">2</span></div>
+          <div class="dash-nav-link" onclick="showCustomerPanel('support',this)"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Support</div>
         </div>
         <div class="dash-nav-section">
           <div class="dash-nav-link" onclick="showPage('vehicles')"><svg viewBox="0 0 24 24" fill="none"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/></svg>Browse Vehicles</div>
@@ -1017,52 +1017,200 @@ ul{list-style:none}
       <div class="dash-sidebar-footer">
         <div class="dash-sidebar-user">
           <div class="dash-sidebar-user-avatar">JD</div>
-          <div>
-            <div class="dash-sidebar-user-name">John Doe</div>
-            <div class="dash-sidebar-user-role">Customer</div>
-          </div>
+          <div><div class="dash-sidebar-user-name">John Doe</div><div class="dash-sidebar-user-role">Customer</div></div>
         </div>
       </div>
     </aside>
 
     <!-- CONTENT -->
     <div class="dash-content">
-      <div class="dash-page-title">Customer Dashboard</div>
-      <div class="dash-page-sub">Welcome back, John! Here's your rental overview.</div>
 
-      <div class="stats-row" style="grid-template-columns:repeat(4,1fr)">
-        <div class="stat-card"><div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><div><div class="stat-num">3</div><div class="stat-label">Total Bookings</div></div></div>
-        <div class="stat-card"><div class="stat-icon yellow"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div><div class="stat-num">4.8</div><div class="stat-label">My Rating</div></div></div>
-        <div class="stat-card"><div class="stat-icon red"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div><div class="stat-num">5</div><div class="stat-label">Wishlist Items</div></div></div>
-        <div class="stat-card"><div class="stat-icon purple"><svg viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div><div><div class="stat-num">2</div><div class="stat-label">Notifications</div></div></div>
-      </div>
-
-      <div class="dash-grid-3">
-        <div class="dash-panel">
-          <div class="section-hd" style="margin-bottom:14px">
-            <span class="section-title" style="font-size:.92rem">Recent Bookings</span>
-            <span class="view-all">View All <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-          </div>
-          <div class="recent-booking-item">
-            <div class="rbi-img"><img src="https://images.unsplash.com/photo-1570733577524-3a047079e80d?w=200&q=80&fit=crop" alt=""/></div>
-            <div class="rbi-info"><div class="rbi-title">Toyota Avanza</div><div class="rbi-date">Nov 20 – Nov 23, 2025</div></div>
-            <div><span class="badge badge-green">Confirmed</span></div>
-          </div>
-          <div class="recent-booking-item">
-            <div class="rbi-img"><img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=200&q=80&fit=crop" alt=""/></div>
-            <div class="rbi-info"><div class="rbi-title">Honda Brio</div><div class="rbi-date">Dec 1 – Dec 3, 2025</div></div>
-            <div><span class="badge badge-yellow">Pending</span></div>
-          </div>
+      <!-- ══ PANEL: OVERVIEW ══ -->
+      <div id="cp-dashboard" class="cust-panel">
+        <div class="dash-page-title">Customer Dashboard</div>
+        <div class="dash-page-sub">Welcome back, John! Here's your rental overview.</div>
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><div><div class="stat-num">3</div><div class="stat-label">Total Bookings</div></div></div>
+          <div class="stat-card"><div class="stat-icon yellow"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div><div class="stat-num">4.8</div><div class="stat-label">My Rating</div></div></div>
+          <div class="stat-card"><div class="stat-icon red"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div><div class="stat-num" id="wl-stat">5</div><div class="stat-label">Wishlist Items</div></div></div>
+          <div class="stat-card"><div class="stat-icon purple"><svg viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div><div><div class="stat-num">2</div><div class="stat-label">Notifications</div></div></div>
         </div>
-        <div class="dash-panel">
-          <div class="section-title" style="font-size:.92rem;margin-bottom:14px">Quick Actions</div>
-          <div class="quick-actions">
-            <button class="qa-btn" onclick="showPage('vehicles')"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Search Vehicles</button>
-            <button class="qa-btn"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>View Wishlist</button>
-            <button class="qa-btn"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41"/></svg>Contact Support</button>
+        <div class="dash-grid-3">
+          <div class="dash-panel">
+            <div class="section-hd" style="margin-bottom:14px">
+              <span class="section-title" style="font-size:.92rem">Recent Bookings</span>
+              <span class="view-all" onclick="showCustomerPanel('bookings')">View All <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+            <div id="cust-recent-bookings">
+              <div class="recent-booking-item"><div class="rbi-img"><img src="https://images.unsplash.com/photo-1570733577524-3a047079e80d?w=200&q=80&fit=crop" alt=""/></div><div class="rbi-info"><div class="rbi-title">Toyota Avanza</div><div class="rbi-date">Nov 20 – Nov 23, 2025</div></div><span class="badge badge-green">Confirmed</span></div>
+              <div class="recent-booking-item"><div class="rbi-img"><img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=200&q=80&fit=crop" alt=""/></div><div class="rbi-info"><div class="rbi-title">Honda Brio</div><div class="rbi-date">Dec 1 – Dec 3, 2025</div></div><span class="badge badge-yellow">Pending</span></div>
+              <div class="recent-booking-item"><div class="rbi-img"><img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=200&q=80&fit=crop" alt=""/></div><div class="rbi-info"><div class="rbi-title">BMW 320i</div><div class="rbi-date">Dec 10 – Dec 12, 2025</div></div><span class="badge badge-blue">Completed</span></div>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <div class="section-title" style="font-size:.92rem;margin-bottom:14px">Quick Actions</div>
+            <div class="quick-actions">
+              <button class="qa-btn" onclick="showPage('vehicles')"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Search Vehicles</button>
+              <button class="qa-btn" onclick="showCustomerPanel('wishlist')"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>View Wishlist</button>
+              <button class="qa-btn" onclick="showCustomerPanel('bookings')"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>My Bookings</button>
+              <button class="qa-btn" onclick="showCustomerPanel('support')"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/></svg>Contact Support</button>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ══ PANEL: MY BOOKINGS ══ -->
+      <div id="cp-bookings" class="cust-panel hidden">
+        <div class="dash-page-title">My Bookings</div>
+        <div class="dash-page-sub">Track all your rental bookings</div>
+        <!-- Filter tabs -->
+        <div style="display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap">
+          <button class="btn btn-primary btn-sm" onclick="filterCustBookings('all',this)">All (3)</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterCustBookings('Pending',this)">Pending (1)</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterCustBookings('Confirmed',this)">Confirmed (1)</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterCustBookings('Completed',this)">Completed (1)</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterCustBookings('Cancelled',this)">Cancelled (0)</button>
+        </div>
+        <div id="cust-bookings-list"></div>
+      </div>
+
+      <!-- ══ PANEL: WISHLIST ══ -->
+      <div id="cp-wishlist" class="cust-panel hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+          <div><div class="dash-page-title">My Wishlist</div><div class="dash-page-sub">Vehicles you've saved for later</div></div>
+          <button class="btn btn-outline btn-sm" onclick="showPage('vehicles')">Browse More Vehicles</button>
+        </div>
+        <div class="vehicles-grid" id="cust-wishlist-grid"></div>
+      </div>
+
+      <!-- ══ PANEL: MY REVIEWS ══ -->
+      <div id="cp-reviews" class="cust-panel hidden">
+        <div class="dash-page-title">My Reviews</div>
+        <div class="dash-page-sub">Reviews you've written for completed rentals</div>
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:14px">
+          <div class="dash-panel">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div class="rbi-img" style="width:60px;height:46px"><img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=100&q=80&fit=crop" alt=""/></div>
+                <div><div style="font-weight:700;font-size:.88rem">BMW 320i</div><div style="font-size:.72rem;color:var(--text-4)">Dec 10–12 · Owner: David Chen</div></div>
+              </div>
+              <div style="display:flex;gap:6px"><button class="btn btn-outline btn-sm" onclick="toast('Edit review…','info')">Edit</button><button class="btn btn-danger btn-sm" onclick="toast('Review deleted','info')">Delete</button></div>
+            </div>
+            <div class="stars" style="margin-bottom:6px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+            <div style="font-size:.82rem;color:var(--text-2);line-height:1.6">Incredible luxury experience! The BMW was spotless, super comfortable. David was professional and helpful. Highly recommended!</div>
+          </div>
+          <div style="text-align:center;padding:20px;background:#fff;border-radius:var(--r-xl);border:2px dashed var(--slate-2)">
+            <div style="font-size:.85rem;color:var(--text-3);margin-bottom:10px">Complete a rental to leave a review</div>
+            <button class="btn btn-primary btn-sm" onclick="showPage('vehicles')">Browse Vehicles</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ PANEL: PROFILE ══ -->
+      <div id="cp-profile" class="cust-panel hidden">
+        <div class="dash-page-title">My Profile</div>
+        <div class="dash-page-sub">Manage your account information</div>
+        <div class="dash-grid-2" style="margin-top:20px">
+          <div class="dash-panel">
+            <div style="text-align:center;margin-bottom:20px">
+              <div style="width:72px;height:72px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:1.4rem;display:flex;align-items:center;justify-content:center;margin:0 auto 10px">JD</div>
+              <div style="font-weight:700;font-size:.95rem">John Doe</div>
+              <div style="font-size:.78rem;color:var(--text-3)">Customer since Nov 2024</div>
+              <button class="btn btn-outline btn-sm" style="margin-top:10px" onclick="toast('Profile photo upload coming soon!','info')">Change Photo</button>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div class="form-group"><label class="form-label">First Name</label><input class="form-input" value="John"/></div>
+              <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" value="Doe"/></div>
+              <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" value="john.doe@email.com"/></div>
+              <div class="form-group"><label class="form-label">Phone</label><input class="form-input" value="+62 812-9999-0000"/></div>
+              <div class="form-group"><label class="form-label">City</label><select class="form-input"><option selected>Jakarta</option><option>Bandung</option><option>Surabaya</option></select></div>
+              <button class="btn btn-primary" onclick="toast('Profile updated successfully!','success')">Save Changes</button>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <div style="font-weight:700;font-size:.92rem;margin-bottom:16px">Change Password</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
+              <div class="form-group"><label class="form-label">Current Password</label><input class="form-input" type="password" placeholder="Current password"/></div>
+              <div class="form-group"><label class="form-label">New Password</label><input class="form-input" type="password" placeholder="New password"/></div>
+              <div class="form-group"><label class="form-label">Confirm Password</label><input class="form-input" type="password" placeholder="Confirm"/></div>
+              <button class="btn btn-primary" onclick="toast('Password changed!','success')">Update Password</button>
+            </div>
+            <div style="font-weight:700;font-size:.92rem;margin-bottom:12px">Rental Statistics</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div style="background:var(--slate-l);border-radius:var(--r-lg);padding:14px;text-align:center"><div style="font-size:1.3rem;font-weight:800;color:var(--blue)">3</div><div style="font-size:.72rem;color:var(--text-3)">Total Rentals</div></div>
+              <div style="background:var(--slate-l);border-radius:var(--r-lg);padding:14px;text-align:center"><div style="font-size:1.3rem;font-weight:800;color:var(--green)">1</div><div style="font-size:.72rem;color:var(--text-3)">Completed</div></div>
+              <div style="background:var(--slate-l);border-radius:var(--r-lg);padding:14px;text-align:center"><div style="font-size:1.3rem;font-weight:800;color:var(--yellow)">4.8★</div><div style="font-size:.72rem;color:var(--text-3)">Avg Rating Given</div></div>
+              <div style="background:var(--slate-l);border-radius:var(--r-lg);padding:14px;text-align:center"><div style="font-size:1.3rem;font-weight:800;color:var(--purple)">$220</div><div style="font-size:.72rem;color:var(--text-3)">Total Spent</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ PANEL: NOTIFICATIONS ══ -->
+      <div id="cp-notifications" class="cust-panel hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+          <div><div class="dash-page-title">Notifications</div><div class="dash-page-sub">Stay updated on your rentals</div></div>
+          <button class="btn btn-ghost btn-sm" onclick="toast('All notifications marked as read','success')">Mark All Read</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:12px;padding:14px;background:var(--blue-l);border-radius:var(--r-xl);border-left:3px solid var(--blue)">
+            <div style="width:36px;height:36px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div>
+            <div><div style="font-weight:600;font-size:.85rem;color:var(--text)">Booking Confirmed! 🎉</div><div style="font-size:.78rem;color:var(--text-2);margin-top:3px">Your Toyota Avanza booking (Nov 20–23) has been confirmed by the owner.</div><div style="font-size:.7rem;color:var(--text-4);margin-top:4px">2 minutes ago</div></div>
+          </div>
+          <div style="display:flex;gap:12px;padding:14px;background:var(--yellow-l);border-radius:var(--r-xl);border-left:3px solid var(--yellow)">
+            <div style="width:36px;height:36px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <div><div style="font-weight:600;font-size:.85rem;color:var(--text)">Upcoming Rental Reminder</div><div style="font-size:.78rem;color:var(--text-2);margin-top:3px">Your Honda Brio rental starts in 2 days. Pick up at Jakarta Selatan.</div><div style="font-size:.7rem;color:var(--text-4);margin-top:4px">1 hour ago</div></div>
+          </div>
+          <div style="display:flex;gap:12px;padding:14px;background:#fff;border-radius:var(--r-xl);border:1px solid var(--slate-2)">
+            <div style="width:36px;height:36px;background:var(--slate-2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--slate)"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+            <div><div style="font-weight:600;font-size:.85rem;color:var(--text)">Leave a Review</div><div style="font-size:.78rem;color:var(--text-2);margin-top:3px">How was your BMW 320i rental? Share your experience!</div><div style="font-size:.7rem;color:var(--text-4);margin-top:4px">3 days ago</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ PANEL: SUPPORT ══ -->
+      <div id="cp-support" class="cust-panel hidden">
+        <div class="dash-page-title">Customer Support</div>
+        <div class="dash-page-sub">We're here to help</div>
+        <div class="dash-grid-2" style="margin-top:20px">
+          <div class="dash-panel">
+            <div style="font-weight:700;font-size:.92rem;margin-bottom:16px">Submit a Request</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div class="form-group">
+                <label class="form-label">Request Type</label>
+                <select class="form-input"><option>Booking Issue</option><option>Vehicle Complaint</option><option>Payment Problem</option><option>Account Issue</option><option>Other</option></select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Related Booking (optional)</label>
+                <select class="form-input"><option>Select booking…</option><option>#BK-001 · Toyota Avanza</option><option>#BK-002 · Honda Brio</option></select>
+              </div>
+              <div class="form-group"><label class="form-label">Subject</label><input class="form-input" placeholder="Brief description of your issue"/></div>
+              <div class="form-group"><label class="form-label">Message</label><textarea class="form-input" rows="4" placeholder="Describe your issue in detail…" style="resize:vertical"></textarea></div>
+              <button class="btn btn-primary" onclick="toast('Support request submitted! We\'ll respond within 24 hours.','success')">Submit Request</button>
+            </div>
+          </div>
+          <div>
+            <div class="dash-panel" style="margin-bottom:14px">
+              <div style="font-weight:700;font-size:.92rem;margin-bottom:12px">My Support Tickets</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--slate-l);border-radius:var(--r);font-size:.8rem;margin-bottom:8px">
+                <div><div style="font-weight:600">#TK-001 · Booking Issue</div><div style="color:var(--text-4);margin-top:2px">Nov 10, 2025</div></div>
+                <span class="badge badge-green">Resolved</span>
+              </div>
+              <div style="text-align:center;padding:16px;color:var(--text-4);font-size:.8rem">No other open tickets</div>
+            </div>
+            <div class="dash-panel">
+              <div style="font-weight:700;font-size:.92rem;margin-bottom:12px">Quick Help</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="padding:10px;background:var(--slate-l);border-radius:var(--r);font-size:.8rem;cursor:pointer" onclick="toast('Opening FAQ…','info')">📖 How to cancel a booking?</div>
+                <div style="padding:10px;background:var(--slate-l);border-radius:var(--r);font-size:.8rem;cursor:pointer" onclick="toast('Opening FAQ…','info')">💳 Refund policy</div>
+                <div style="padding:10px;background:var(--slate-l);border-radius:var(--r);font-size:.8rem;cursor:pointer" onclick="toast('Opening FAQ…','info')">📞 Contact: +62 21-RENTEASE</div>
+                <div style="padding:10px;background:var(--slate-l);border-radius:var(--r);font-size:.8rem;cursor:pointer" onclick="toast('Opening FAQ…','info')">📧 support@rentease.id</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -2201,6 +2349,92 @@ function submitOwnerRegistration(){
   if(!name||!email||!biz){ toast('Please fill all required fields','error'); return; }
   loginAs('owner');
   toast(`Welcome ${name}! Owner account created.`,'success');
+}
+
+/* ════ CUSTOMER PANELS ════ */
+const custBookings = [
+  {id:'BK-201',vehicle:'Toyota Avanza',img:'https://images.unsplash.com/photo-1570733577524-3a047079e80d?w=200&q=80&fit=crop',pickup:'2025-11-20',ret:'2025-11-23',days:3,total:80,status:'Confirmed',loc:'Jakarta Pusat',owner:'Ahmad Rizki'},
+  {id:'BK-202',vehicle:'Honda Brio',img:'https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=200&q=80&fit=crop',pickup:'2025-12-01',ret:'2025-12-03',days:2,total:45,status:'Pending',loc:'Jakarta Selatan',owner:'Budi Santoso'},
+  {id:'BK-203',vehicle:'BMW 320i',img:'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=200&q=80&fit=crop',pickup:'2025-12-10',ret:'2025-12-12',days:2,total:245,status:'Completed',loc:'Jakarta Pusat',owner:'David Chen'},
+];
+
+function showCustomerPanel(panelId, navEl){
+  document.querySelectorAll('#page-customer .cust-panel').forEach(p=>p.classList.add('hidden'));
+  const p = document.getElementById('cp-'+panelId);
+  if(p) p.classList.remove('hidden');
+  if(navEl){
+    navEl.closest('.dash-nav').querySelectorAll('.dash-nav-link').forEach(l=>l.classList.remove('active'));
+    navEl.classList.add('active');
+  }
+  if(panelId==='bookings') renderCustBookings('all');
+  if(panelId==='wishlist') renderCustWishlist();
+}
+
+function renderCustBookings(filter){
+  const list = document.getElementById('cust-bookings-list');
+  if(!list) return;
+  const data = filter==='all' ? custBookings : custBookings.filter(b=>b.status===filter);
+  if(!data.length){ list.innerHTML='<div style="text-align:center;padding:40px;color:var(--text-4)">No bookings found</div>'; return; }
+  const sc = {Pending:'badge-yellow',Confirmed:'badge-green',Completed:'badge-blue',Cancelled:'badge-red'};
+  list.innerHTML = data.map(b=>`
+    <div class="dash-panel" style="margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="width:90px;height:66px;border-radius:10px;overflow:hidden;flex-shrink:0"><img src="${b.img}" style="width:100%;height:100%;object-fit:cover" alt=""/></div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+            <span style="font-weight:700;color:var(--blue);font-size:.8rem">#${b.id}</span>
+            <span class="badge ${sc[b.status]||'badge-gray'}">${b.status}</span>
+          </div>
+          <div style="font-weight:700;font-size:.92rem;margin-bottom:4px">${b.vehicle}</div>
+          <div style="font-size:.78rem;color:var(--text-3);display:flex;gap:12px;flex-wrap:wrap">
+            <span>📅 ${b.pickup} → ${b.ret} (${b.days} days)</span>
+            <span>📍 ${b.loc}</span>
+            <span>👤 Owner: ${b.owner}</span>
+            <span style="font-weight:700;color:var(--blue)">💰 Total: $${b.total}</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
+          <button class="btn btn-outline btn-sm" onclick="openDetail(${VEHICLES.findIndex(v=>v.name===b.vehicle)+1||1});toast('Viewing booking details','info')">View Details</button>
+          ${b.status==='Pending'||b.status==='Confirmed'?`<button class="btn btn-danger btn-sm" onclick="cancelCustBooking('${b.id}')">Cancel</button>`:''}
+          ${b.status==='Completed'?`<button class="btn btn-success btn-sm" onclick="showCustomerPanel('reviews')">Write Review</button>`:''}
+          ${b.status==='Completed'?`<button class="btn btn-ghost btn-sm" onclick="toast('Invoice downloading…','info')">Download Invoice</button>`:''}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function cancelCustBooking(id){
+  const b = custBookings.find(x=>x.id===id);
+  if(!b) return;
+  if(!confirm(`Cancel booking #${id} for ${b.vehicle}?`)) return;
+  b.status='Cancelled';
+  renderCustBookings('all');
+  toast(`Booking #${id} cancelled`,'info');
+}
+
+function filterCustBookings(filter, btn){
+  if(btn){
+    btn.closest('div').querySelectorAll('button').forEach(b=>b.className='btn btn-ghost btn-sm');
+    btn.className = 'btn btn-primary btn-sm';
+  }
+  renderCustBookings(filter);
+}
+
+function renderCustWishlist(){
+  const grid = document.getElementById('cust-wishlist-grid');
+  if(!grid) return;
+  const wishVehicles = VEHICLES.filter(v=>favs.has(v.id));
+  if(!wishVehicles.length){
+    grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:60px 20px">
+      <div style="font-size:2rem;margin-bottom:12px">❤️</div>
+      <div style="font-weight:700;color:var(--text-2);margin-bottom:8px">Your wishlist is empty</div>
+      <div style="color:var(--text-3);font-size:.85rem;margin-bottom:16px">Save vehicles you love by clicking the heart icon</div>
+      <button class="btn btn-primary" onclick="showPage('vehicles')">Browse Vehicles</button>
+    </div>`;
+    return;
+  }
+  grid.innerHTML = wishVehicles.map(vehicleCard).join('');
 }
 
 /* Initial render */
