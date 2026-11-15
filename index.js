@@ -14,12 +14,12 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 const express = require("express");
-const path    = require("path");
+const path = require("path");
 const { logger, notFound, errorHandler } = require("./middleware");
 const vehiclesRouter = require("./routes/vehicles");
-const ownersRouter   = require("./routes/owners");   // bonus second resource
+const ownersRouter = require("./routes/owners");   // bonus second resource
 
-const app  = express();
+const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ── 1. Parse JSON request bodies ─────────────────────────────────────────────
@@ -40,22 +40,22 @@ app.get("/", (req, res) => {
     success: true,
     message: "Welcome to RentEase API 🚗",
     tagline: "Your Journey, Your Choice.",
-    author:  "Rahumathulla Misfar Mohammed",
-    nim:     "2005342004231",
-    theme:   "Vehicle Rental Marketplace",
+    author: "Rahumathulla Misfar Mohammed",
+    nim: "2005342004231",
+    theme: "Vehicle Rental Marketplace",
     endpoints: {
-      vehicles:         `${base}/vehicles`,
-      vehicleById:      `${base}/vehicles/:id`,
-      vehicleSearch:    `${base}/vehicles/search?q=toyota&location=jakarta`,
-      vehicleCategory:  `${base}/vehicles/category/:name`,
-      vehicleFiles:     `${base}/vehicles/files/*path`,
-      owners:           `${base}/owners`,
-      ownerById:        `${base}/owners/:id`,
-      ownerSearch:      `${base}/owners/search?q=budi&city=jakarta`,
+      vehicles: `${base}/vehicles`,
+      vehicleById: `${base}/vehicles/:id`,
+      vehicleSearch: `${base}/vehicles/search?q=toyota&location=jakarta`,
+      vehicleCategory: `${base}/vehicles/category/:name`,
+      vehicleFiles: `${base}/vehicles/files/*path`,
+      owners: `${base}/owners`,
+      ownerById: `${base}/owners/:id`,
+      ownerSearch: `${base}/owners/search?q=budi&city=jakarta`,
     },
     auth: {
       description: "Protected routes (DELETE) require this header",
-      header:      "Authorization: Bearer rentease-secret-2024",
+      header: "Authorization: Bearer rentease-secret-2024",
     },
   });
 });
