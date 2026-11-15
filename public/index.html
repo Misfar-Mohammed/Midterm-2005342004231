@@ -1515,7 +1515,7 @@ ul{list-style:none}
 ══════════════════════════════════════════════════════ -->
 <div class="modal-overlay hidden" id="modal-overlay" onclick="closeModal(event)">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal()"><svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <button class="modal-close" onclick="document.getElementById('modal-overlay').classList.add('hidden');document.getElementById('form-owner-register').classList.add('hidden');switchTab('login')"><svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <div class="modal-tabs">
       <div class="modal-tab active" id="tab-login" onclick="switchTab('login')">Login</div>
       <div class="modal-tab" id="tab-register" onclick="switchTab('register')">Register</div>
@@ -1784,12 +1784,18 @@ function cycleRole(){
 /* ════ MODAL ════ */
 function openModal(tab){
   document.getElementById('modal-overlay').classList.remove('hidden');
+  // Always hide owner register form when opening modal normally
+  document.getElementById('form-owner-register').classList.add('hidden');
   switchTab(tab||'login');
 }
 
 function closeModal(e){
-  if(e&&e.target!==document.getElementById('modal-overlay'))return;
+  // e is undefined when called from X button; block only if clicking non-overlay background
+  if(e && e.target !== document.getElementById('modal-overlay')) return;
   document.getElementById('modal-overlay').classList.add('hidden');
+  // Reset all forms to default state
+  document.getElementById('form-owner-register').classList.add('hidden');
+  switchTab('login');
 }
 
 function switchTab(t){
@@ -1797,6 +1803,8 @@ function switchTab(t){
   document.getElementById('tab-register').classList.toggle('active',t==='register');
   document.getElementById('form-login').classList.toggle('hidden',t!=='login');
   document.getElementById('form-register').classList.toggle('hidden',t!=='register');
+  // Always hide owner register form when switching tabs
+  document.getElementById('form-owner-register').classList.add('hidden');
 }
 
 /* ════ NOTIFICATIONS ════ */
@@ -2177,19 +2185,19 @@ function openOwnerRegister(){
   document.getElementById('form-login').classList.add('hidden');
   document.getElementById('form-register').classList.add('hidden');
   document.getElementById('form-owner-register').classList.remove('hidden');
-  document.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-login').classList.remove('active');
+  document.getElementById('tab-register').classList.remove('active');
 }
 
 function closeOwnerRegisterForm(){
   document.getElementById('form-owner-register').classList.add('hidden');
-  document.getElementById('form-login').classList.remove('hidden');
-  switchTab('login');
+  switchTab('register');
 }
 
 function submitOwnerRegistration(){
-  const name = document.getElementById('or-name').value.trim();
+  const name  = document.getElementById('or-name').value.trim();
   const email = document.getElementById('or-email').value.trim();
-  const biz = document.getElementById('or-business').value.trim();
+  const biz   = document.getElementById('or-business').value.trim();
   if(!name||!email||!biz){ toast('Please fill all required fields','error'); return; }
   loginAs('owner');
   toast(`Welcome ${name}! Owner account created.`,'success');
