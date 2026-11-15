@@ -1075,15 +1075,15 @@ ul{list-style:none}
     <aside class="dash-sidebar">
       <div class="dash-nav">
         <div class="dash-nav-section">
-          <div class="dash-nav-link active" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/></svg>My Vehicles</div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>Booking Requests<span class="nav-link-badge">3</span></div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Active Rentals</div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Rental History</div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Earnings</div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Reviews</div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>Profile</div>
-          <div class="dash-nav-link" onclick="setDashNav(this)"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3"/></svg>Settings</div>
+          <div class="dash-nav-link active" onclick="showOwnerPanel('dashboard',this)"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
+          <div class="dash-nav-link" onclick="showOwnerPanel('vehicles',this)"><svg viewBox="0 0 24 24" fill="none"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/></svg>My Vehicles</div>
+          <div class="dash-nav-link" onclick="showOwnerPanel('requests',this)"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>Booking Requests<span class="nav-link-badge">2</span></div>
+          <div class="dash-nav-link" onclick="showOwnerPanel('rentals',this)"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Active Rentals</div>
+          <div class="dash-nav-link" onclick="showOwnerPanel('dashboard',this)"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Rental History</div>
+          <div class="dash-nav-link" onclick="showOwnerPanel('earnings',this)"><svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Earnings</div>
+          <div class="dash-nav-link" onclick="showOwnerPanel('reviews',this)"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Reviews</div>
+          <div class="dash-nav-link" onclick="showOwnerPanel('profile',this)"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>Profile</div>
+          <div class="dash-nav-link" onclick="showOwnerPanel('profile',this)"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3"/></svg>Settings</div>
         </div>
         <div class="dash-nav-section">
           <div class="dash-nav-link" onclick="logout()"><svg viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Logout</div>
@@ -1102,57 +1102,160 @@ ul{list-style:none}
     </aside>
 
     <div class="dash-content">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px">
-        <div>
-          <div class="dash-page-title">Owner Dashboard</div>
-          <div class="dash-page-sub">Ahmad Rizki · Vehicle Owner</div>
-        </div>
-        <button class="btn btn-primary" onclick="toast('Add vehicle form opening…','info')">
-          <svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Add Vehicle
-        </button>
-      </div>
-
-      <div class="stats-row">
-        <div class="stat-card"><div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/></svg></div><div><div class="stat-num">5</div><div class="stat-label">My Vehicles</div></div></div>
-        <div class="stat-card"><div class="stat-icon purple"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><div><div class="stat-num">12</div><div class="stat-label">Total Bookings</div></div></div>
-        <div class="stat-card"><div class="stat-icon green"><svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="stat-num">$8,750</div><div class="stat-label">Total Earnings</div></div></div>
-        <div class="stat-card"><div class="stat-icon yellow"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div><div class="stat-num">4.7</div><div class="stat-label">Rating</div></div></div>
-      </div>
-
-      <div class="dash-grid-3">
-        <div class="dash-panel">
-          <div class="section-hd" style="margin-bottom:12px">
-            <span class="section-title" style="font-size:.92rem">Earnings Overview</span>
+      <!-- ══ PANEL: DASHBOARD OVERVIEW ══ -->
+      <div id="op-dashboard" class="owner-panel">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px">
+          <div>
+            <div class="dash-page-title">Owner Dashboard</div>
+            <div class="dash-page-sub">Ahmad Rizki · Vehicle Owner</div>
           </div>
-          <div class="earnings-chart">
-            <div class="chart-bars">
-              <div class="chart-bar" style="height:40%"></div>
-              <div class="chart-bar" style="height:55%"></div>
-              <div class="chart-bar" style="height:35%"></div>
-              <div class="chart-bar" style="height:70%"></div>
-              <div class="chart-bar" style="height:60%"></div>
-              <div class="chart-bar" style="height:90%"></div>
+          <button class="btn btn-primary" onclick="openAddVehicleModal()">
+            <svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Vehicle
+          </button>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/></svg></div><div><div class="stat-num" id="ov-count">5</div><div class="stat-label">My Vehicles</div></div></div>
+          <div class="stat-card"><div class="stat-icon purple"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><div><div class="stat-num">12</div><div class="stat-label">Total Bookings</div></div></div>
+          <div class="stat-card"><div class="stat-icon green"><svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="stat-num">$8,750</div><div class="stat-label">Total Earnings</div></div></div>
+          <div class="stat-card"><div class="stat-icon yellow"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div><div class="stat-num">4.7</div><div class="stat-label">Rating</div></div></div>
+        </div>
+        <div class="dash-grid-3">
+          <div class="dash-panel">
+            <div class="section-hd" style="margin-bottom:12px"><span class="section-title" style="font-size:.92rem">Earnings Overview</span><span style="font-size:.8rem;color:var(--green);font-weight:600">+23% this month</span></div>
+            <div class="earnings-chart">
+              <div class="chart-bars">
+                <div class="chart-bar" style="height:40%"></div><div class="chart-bar" style="height:55%"></div><div class="chart-bar" style="height:35%"></div><div class="chart-bar" style="height:70%"></div><div class="chart-bar" style="height:60%"></div><div class="chart-bar" style="height:90%"></div>
+              </div>
+            </div>
+            <div class="chart-labels"><span class="chart-label">Jan</span><span class="chart-label">Feb</span><span class="chart-label">Mar</span><span class="chart-label">Apr</span><span class="chart-label">May</span><span class="chart-label">Jun</span></div>
+          </div>
+          <div class="dash-panel">
+            <div class="section-hd" style="margin-bottom:12px"><span class="section-title" style="font-size:.92rem">Recent Bookings</span><span class="view-all" onclick="showOwnerPanel('requests')">View All <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+            <div class="recent-booking-item"><div class="rbi-img"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=200&q=80&fit=crop" alt=""/></div><div class="rbi-info"><div class="rbi-title">Honda Jazz</div><div class="rbi-date">Nov 19 – Nov 21</div></div><div><span class="badge badge-green">Confirmed</span></div></div>
+            <div class="recent-booking-item"><div class="rbi-img"><img src="https://images.unsplash.com/photo-1534093607318-f025413f49cb?w=200&q=80&fit=crop" alt=""/></div><div class="rbi-info"><div class="rbi-title">Toyota Fortuner</div><div class="rbi-date">Nov 18 – Nov 20</div></div><div><span class="badge badge-yellow">Pending</span></div></div>
+            <div class="recent-booking-item"><div class="rbi-img"><img src="https://images.unsplash.com/photo-1570733577524-3a047079e80d?w=200&q=80&fit=crop" alt=""/></div><div class="rbi-info"><div class="rbi-title">Toyota Avanza</div><div class="rbi-date">Dec 1 – Dec 5</div></div><div><span class="badge badge-yellow">Pending</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ PANEL: MY VEHICLES ══ -->
+      <div id="op-vehicles" class="owner-panel hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+          <div><div class="dash-page-title">My Vehicles</div><div class="dash-page-sub">Manage your vehicle listings</div></div>
+          <button class="btn btn-primary" onclick="openAddVehicleModal()"><svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Vehicle</button>
+        </div>
+        <div class="dash-panel">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <div style="font-size:.88rem;font-weight:600">All Vehicles (<span id="ov-count-2">5</span>)</div>
+            <div style="display:flex;gap:8px">
+              <input class="form-input" style="width:180px;font-size:.78rem;padding:6px 10px" placeholder="Search vehicles…"/>
+              <select class="form-input" style="width:130px;font-size:.78rem;padding:6px 10px"><option>All Status</option><option>Available</option><option>Rented</option><option>Maintenance</option></select>
             </div>
           </div>
-          <div class="chart-labels">
-            <span class="chart-label">Jan</span><span class="chart-label">Feb</span><span class="chart-label">Mar</span><span class="chart-label">Apr</span><span class="chart-label">May</span><span class="chart-label">Jun</span>
+          <div style="overflow-x:auto">
+            <table class="booking-table">
+              <thead><tr><th>Vehicle</th><th>Status</th><th>Category</th><th>Price</th><th>Location</th><th>Rating</th><th>Trips</th><th>Actions</th></tr></thead>
+              <tbody id="owner-veh-tbody"></tbody>
+            </table>
           </div>
         </div>
+      </div>
+
+      <!-- ══ PANEL: BOOKING REQUESTS ══ -->
+      <div id="op-requests" class="owner-panel hidden">
+        <div style="margin-bottom:24px"><div class="dash-page-title">Booking Requests</div><div class="dash-page-sub">Review and manage incoming rental requests</div></div>
+        <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap">
+          <span class="badge badge-yellow" style="padding:6px 14px;font-size:.8rem">⏳ Pending (2)</span>
+          <span class="badge badge-green" style="padding:6px 14px;font-size:.8rem">✓ Confirmed (1)</span>
+          <span class="badge badge-blue" style="padding:6px 14px;font-size:.8rem">✔ Completed (1)</span>
+          <span class="badge badge-red" style="padding:6px 14px;font-size:.8rem">✕ Cancelled (1)</span>
+        </div>
+        <div id="booking-req-list"></div>
+      </div>
+
+      <!-- ══ PANEL: ACTIVE RENTALS ══ -->
+      <div id="op-rentals" class="owner-panel hidden">
+        <div style="margin-bottom:24px"><div class="dash-page-title">Active Rentals</div><div class="dash-page-sub">Track currently rented vehicles</div></div>
+        <div id="active-rentals-list"></div>
+      </div>
+
+      <!-- ══ PANEL: EARNINGS ══ -->
+      <div id="op-earnings" class="owner-panel hidden">
+        <div style="margin-bottom:24px"><div class="dash-page-title">Earnings</div><div class="dash-page-sub">Revenue breakdown per vehicle</div></div>
+        <div class="stats-row" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px">
+          <div class="stat-card"><div class="stat-icon green"><svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="stat-num">$8,750</div><div class="stat-label">Total Earnings</div><div class="stat-change up">↑ 23% this month</div></div></div>
+          <div class="stat-card"><div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><div><div class="stat-num">35</div><div class="stat-label">Total Trips</div></div></div>
+          <div class="stat-card"><div class="stat-icon purple"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="stat-num">$250</div><div class="stat-label">Avg per Trip</div></div></div>
+        </div>
         <div class="dash-panel">
-          <div class="section-hd" style="margin-bottom:12px">
-            <span class="section-title" style="font-size:.92rem">Recent Bookings</span>
-            <span class="view-all">View All <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          <div style="font-weight:700;font-size:.92rem;margin-bottom:16px">Earnings per Vehicle</div>
+          <table class="booking-table">
+            <thead><tr><th>Vehicle</th><th>Trips</th><th>Earnings</th><th>Daily Rate</th><th>Status</th></tr></thead>
+            <tbody id="earnings-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══ PANEL: REVIEWS ══ -->
+      <div id="op-reviews" class="owner-panel hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+          <div><div class="dash-page-title">Reviews</div><div class="dash-page-sub">Customer feedback on your vehicles</div></div>
+          <div class="stat-card" style="flex-direction:row;gap:10px;padding:12px 16px;min-width:0">
+            <div style="font-size:1.6rem;font-weight:800;color:var(--blue)">4.7</div>
+            <div><div style="font-size:.7rem;color:var(--text-3)">Average Rating</div><div class="stars" style="margin-top:2px"><svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
           </div>
-          <div class="recent-booking-item">
-            <div class="rbi-img"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=200&q=80&fit=crop" alt=""/></div>
-            <div class="rbi-info"><div class="rbi-title">Honda Jazz</div><div class="rbi-date">Nov 19 – Nov 21</div></div>
-            <div><span class="badge badge-green">Confirmed</span></div>
+        </div>
+        <div id="owner-reviews-list"></div>
+      </div>
+
+      <!-- ══ PANEL: PROFILE / SETTINGS ══ -->
+      <div id="op-profile" class="owner-panel hidden">
+        <div style="margin-bottom:24px"><div class="dash-page-title">Profile & Settings</div><div class="dash-page-sub">Manage your owner account information</div></div>
+        <div class="dash-grid-2">
+          <div class="dash-panel">
+            <div style="font-weight:700;font-size:.92rem;margin-bottom:16px">Personal Information</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" value="Ahmad Rizki"/></div>
+              <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" value="ahmad.rizki@email.com"/></div>
+              <div class="form-group"><label class="form-label">Phone</label><input class="form-input" value="+62 812-3456-7890"/></div>
+              <div class="form-group"><label class="form-label">City</label><select class="form-input"><option selected>Jakarta</option><option>Bandung</option><option>Surabaya</option></select></div>
+              <button class="btn btn-primary" onclick="toast('Profile updated!','success')">Save Changes</button>
+            </div>
           </div>
-          <div class="recent-booking-item">
-            <div class="rbi-img"><img src="https://images.unsplash.com/photo-1534093607318-f025413f49cb?w=200&q=80&fit=crop" alt=""/></div>
-            <div class="rbi-info"><div class="rbi-title">Toyota Fortuner</div><div class="rbi-date">Nov 18 – Nov 20</div></div>
-            <div><span class="badge badge-yellow">Pending</span></div>
+          <div class="dash-panel">
+            <div style="font-weight:700;font-size:.92rem;margin-bottom:16px">Business Information</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div class="form-group"><label class="form-label">Business Name</label><input class="form-input" value="Rizki Car Rental"/></div>
+              <div class="form-group"><label class="form-label">Business Address</label><input class="form-input" value="Jl. Sudirman No. 45, Jakarta"/></div>
+              <div style="padding:12px;background:var(--green-l);border-radius:var(--r-lg);font-size:.8rem;color:var(--green);font-weight:600">✓ Account Verified</div>
+              <div style="font-weight:700;font-size:.92rem;margin-top:4px">Verification Documents</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--slate-l);border-radius:var(--r);font-size:.8rem"><span>🪪 ID Card</span><span class="badge badge-green">Verified</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--slate-l);border-radius:var(--r);font-size:.8rem"><span>📄 Business License</span><span class="badge badge-green">Verified</span></div>
+              </div>
+              <button class="btn btn-outline" onclick="toast('Document upload coming soon!','info')">Upload New Document</button>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <div style="font-weight:700;font-size:.92rem;margin-bottom:16px">Change Password</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div class="form-group"><label class="form-label">Current Password</label><input class="form-input" type="password" placeholder="Current password"/></div>
+              <div class="form-group"><label class="form-label">New Password</label><input class="form-input" type="password" placeholder="New password"/></div>
+              <div class="form-group"><label class="form-label">Confirm Password</label><input class="form-input" type="password" placeholder="Confirm new password"/></div>
+              <button class="btn btn-primary" onclick="toast('Password updated!','success')">Update Password</button>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <div style="font-weight:700;font-size:.92rem;margin-bottom:16px">Notification Preferences</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:.85rem;color:var(--text-2)">New booking requests</span><input type="checkbox" checked style="accent-color:var(--blue);width:16px;height:16px"/></label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:.85rem;color:var(--text-2)">Booking confirmations</span><input type="checkbox" checked style="accent-color:var(--blue);width:16px;height:16px"/></label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:.85rem;color:var(--text-2)">Upcoming vehicle pickups</span><input type="checkbox" checked style="accent-color:var(--blue);width:16px;height:16px"/></label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:.85rem;color:var(--text-2)">Customer reviews</span><input type="checkbox" style="accent-color:var(--blue);width:16px;height:16px"/></label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:.85rem;color:var(--text-2)">Email notifications</span><input type="checkbox" checked style="accent-color:var(--blue);width:16px;height:16px"/></label>
+              <button class="btn btn-primary" onclick="toast('Preferences saved!','success')">Save Preferences</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1331,6 +1434,83 @@ ul{list-style:none}
 </div>
 
 <!-- ══════════════════════════════════════════════════════
+     MODAL: ADD / EDIT VEHICLE
+══════════════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="av-modal" onclick="if(event.target===this)closeAddVehicleModal()">
+  <div class="modal" style="max-width:580px">
+    <button class="modal-close" onclick="closeAddVehicleModal()"><svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <div class="modal-title" id="av-modal-title">Add New Vehicle</div>
+    <div class="modal-sub">Fill in your vehicle details to list it on RentEase</div>
+    <form id="av-form" onsubmit="event.preventDefault();submitVehicle()">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+        <div class="form-group" style="grid-column:1/-1">
+          <label class="form-label">Vehicle Name / Brand & Model *</label>
+          <input class="form-input" id="av-name" placeholder="e.g. Toyota Avanza" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category *</label>
+          <select class="form-input" id="av-cat" required>
+            <option value="">Select category</option>
+            <option>MPV</option><option>SUV</option><option>Hatchback</option><option>Sedan</option><option>Van</option><option>Pickup</option><option>Motorcycle</option><option>Luxury</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Manufacturing Year *</label>
+          <input class="form-input" id="av-year" type="number" placeholder="2022" min="2000" max="2025" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Number of Seats *</label>
+          <input class="form-input" id="av-seats" type="number" placeholder="5" min="1" max="20" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Daily Rental Price (USD) *</label>
+          <input class="form-input" id="av-price" type="number" placeholder="25" min="1" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Transmission *</label>
+          <select class="form-input" id="av-trans">
+            <option>Automatic</option><option>Manual</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Fuel Type *</label>
+          <select class="form-input" id="av-fuel">
+            <option>Petrol</option><option>Diesel</option><option>Electric</option><option>Hybrid</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location / City *</label>
+          <select class="form-input" id="av-loc" required>
+            <option value="">Select city</option>
+            <option>Jakarta</option><option>Bandung</option><option>Surabaya</option><option>Bali</option><option>Yogyakarta</option><option>Makassar</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Registration Number *</label>
+          <input class="form-input" id="av-reg" placeholder="e.g. B 1234 XYZ" required/>
+        </div>
+        <div class="form-group" style="grid-column:1/-1">
+          <label class="form-label">Vehicle Description</label>
+          <textarea class="form-input" id="av-desc" rows="3" placeholder="Describe your vehicle, features, rental conditions…" style="resize:vertical"></textarea>
+        </div>
+        <div class="form-group" style="grid-column:1/-1">
+          <label class="form-label">Vehicle Photos</label>
+          <div style="border:2px dashed var(--slate-2);border-radius:var(--r-lg);padding:24px;text-align:center;cursor:pointer;transition:.15s" onclick="toast('File upload coming soon!','info')" onmouseover="this.style.borderColor='var(--blue)'" onmouseout="this.style.borderColor='var(--slate-2)'">
+            <div style="font-size:1.5rem;margin-bottom:8px">📷</div>
+            <div style="font-size:.82rem;font-weight:600;color:var(--text-2)">Click to upload vehicle photos</div>
+            <div style="font-size:.72rem;color:var(--text-4);margin-top:4px">PNG, JPG up to 10MB each (max 10 photos)</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button type="button" class="btn btn-ghost" style="flex:1" onclick="closeAddVehicleModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary" style="flex:2">Save Vehicle Listing</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
      MODAL: LOGIN / REGISTER
 ══════════════════════════════════════════════════════ -->
 <div class="modal-overlay hidden" id="modal-overlay" onclick="closeModal(event)">
@@ -1368,9 +1548,39 @@ ul{list-style:none}
         <div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" placeholder="Create a password"/></div>
         <div class="form-group">
           <label class="form-label">Register as</label>
-          <select class="form-input"><option>Customer</option><option>Vehicle Owner</option></select>
+          <select class="form-input" id="register-role" onchange="toggleOwnerRegFields(this.value)">
+            <option value="customer">Customer</option>
+            <option value="owner">Vehicle Owner</option>
+          </select>
         </div>
         <button class="btn btn-primary btn-block btn-lg" onclick="loginAs('customer')">Create Account</button>
+        <div style="text-align:center;font-size:.78rem;color:var(--text-3)">Want to become an owner? <span style="color:var(--blue);cursor:pointer;font-weight:600" onclick="openOwnerRegister()">Owner Registration →</span></div>
+      </div>
+    </div>
+    <!-- OWNER REGISTRATION FORM -->
+    <div id="form-owner-register" class="hidden">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <button onclick="closeOwnerRegisterForm()" style="border:none;background:none;cursor:pointer;color:var(--blue);font-size:.82rem;font-weight:600;padding:0">← Back</button>
+      </div>
+      <div class="modal-title">Owner Registration</div>
+      <div class="modal-sub">Register as a Vehicle Owner and start earning</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="or-name" placeholder="Ahmad Rizki"/></div>
+        <div class="form-group"><label class="form-label">Email *</label><input class="form-input" id="or-email" type="email" placeholder="owner@email.com"/></div>
+        <div class="form-group"><label class="form-label">Phone Number *</label><input class="form-input" id="or-phone" placeholder="+62 812-XXXX-XXXX"/></div>
+        <div class="form-group"><label class="form-label">Business Name *</label><input class="form-input" id="or-business" placeholder="e.g. Rizki Car Rental"/></div>
+        <div class="form-group">
+          <label class="form-label">City / Location *</label>
+          <select class="form-input" id="or-city">
+            <option value="">Select your city</option>
+            <option>Jakarta</option><option>Bandung</option><option>Surabaya</option><option>Bali</option><option>Yogyakarta</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Password *</label><input class="form-input" type="password" placeholder="Create a strong password"/></div>
+        <div style="background:var(--blue-l);border-radius:var(--r-lg);padding:12px;font-size:.78rem;color:var(--blue)">
+          📋 <strong>After registration:</strong> Upload your ID card and business documents. Admin will verify your account within 24 hours.
+        </div>
+        <button class="btn btn-primary btn-block btn-lg" onclick="submitOwnerRegistration()">Register as Owner</button>
       </div>
     </div>
   </div>
@@ -1682,6 +1892,308 @@ document.addEventListener('click', e=>{
   if(bp){bp.value=fmt(today);bp.min=fmt(today);}
   if(br){br.value=fmt(tom);br.min=fmt(tom);}
 })();
+
+/* ════ OWNER DATA ════ */
+let ownerVehicles = [
+  {id:1,name:'Toyota Avanza',cat:'MPV',year:2022,seats:7,trans:'Automatic',fuel:'Petrol',price:25,loc:'Jakarta',status:'Available',regNum:'B 1234 XYZ',img:'https://images.unsplash.com/photo-1570733577524-3a047079e80d?w=300&q=80&fit=crop',rating:4.8,bookings:12,earnings:1850},
+  {id:3,name:'Toyota Fortuner',cat:'SUV',year:2021,seats:7,trans:'Automatic',fuel:'Diesel',price:70,loc:'Jakarta',status:'Rented',regNum:'B 5678 ABC',img:'https://images.unsplash.com/photo-1534093607318-f025413f49cb?w=300&q=80&fit=crop',rating:4.9,bookings:8,earnings:3920},
+  {id:9,name:'Honda Jazz',cat:'Hatchback',year:2022,seats:5,trans:'Automatic',fuel:'Petrol',price:28,loc:'Jakarta',status:'Available',regNum:'B 9012 DEF',img:'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=300&q=80&fit=crop',rating:4.5,bookings:5,earnings:980},
+  {id:10,name:'Mitsubishi Triton',cat:'Pickup',year:2021,seats:5,trans:'Manual',fuel:'Diesel',price:50,loc:'Surabaya',status:'Maintenance',regNum:'L 3456 GHI',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=80&fit=crop',rating:4.4,bookings:4,earnings:1200},
+  {id:7,name:'Toyota Innova',cat:'MPV',year:2022,seats:8,trans:'Automatic',fuel:'Diesel',price:40,loc:'Bandung',status:'Available',regNum:'D 7890 JKL',img:'https://images.unsplash.com/photo-1517524285303-d6fc683dddf8?w=300&q=80&fit=crop',rating:4.6,bookings:6,earnings:800}
+];
+
+let bookingRequests = [
+  {id:'BK-101',customer:'John Doe',vehicle:'Toyota Avanza',pickup:'2025-12-01',ret:'2025-12-05',days:4,total:105,status:'Pending',avatar:'JD',phone:'+62 812-3456-7890',loc:'Jakarta Pusat'},
+  {id:'BK-102',customer:'Siti Rahayu',vehicle:'Honda Jazz',pickup:'2025-12-03',ret:'2025-12-06',days:3,total:89,status:'Pending',avatar:'SR',phone:'+62 821-9876-5432',loc:'Jakarta Selatan'},
+  {id:'BK-103',customer:'Budi Santoso',vehicle:'Toyota Fortuner',pickup:'2025-11-28',ret:'2025-11-30',days:2,total:145,status:'Confirmed',avatar:'BS',phone:'+62 831-5555-1234',loc:'Bandung'},
+  {id:'BK-104',customer:'Ahmad Kurniawan',vehicle:'Toyota Avanza',pickup:'2025-11-20',ret:'2025-11-23',days:3,total:80,status:'Completed',avatar:'AK',phone:'+62 822-7777-8888',loc:'Jakarta Pusat'},
+  {id:'BK-105',customer:'Rudi Hartono',vehicle:'Honda Jazz',pickup:'2025-11-15',ret:'2025-11-17',days:2,total:61,status:'Cancelled',avatar:'RH',phone:'+62 813-4444-9999',loc:'Depok'},
+];
+
+let activeRentals = [
+  {id:'BK-103',customer:'Budi Santoso',vehicle:'Toyota Fortuner',img:'https://images.unsplash.com/photo-1534093607318-f025413f49cb?w=100&q=80&fit=crop',start:'2025-11-28',end:'2025-11-30',avatar:'BS',daysLeft:2,handedOver:true},
+];
+
+/* ════ OWNER PANELS ════ */
+function showOwnerPanel(panelId, navEl){
+  document.querySelectorAll('#page-owner .owner-panel').forEach(p=>p.classList.add('hidden'));
+  const p = document.getElementById('op-'+panelId);
+  if(p) p.classList.remove('hidden');
+  if(navEl){
+    navEl.closest('.dash-nav').querySelectorAll('.dash-nav-link').forEach(l=>l.classList.remove('active'));
+    navEl.classList.add('active');
+  }
+  if(panelId==='vehicles') renderOwnerVehicles();
+  if(panelId==='requests') renderBookingRequests();
+  if(panelId==='rentals') renderActiveRentals();
+  if(panelId==='earnings') renderEarnings();
+  if(panelId==='reviews') renderOwnerReviews();
+}
+
+/* ════ RENDER: OWNER VEHICLES ════ */
+function renderOwnerVehicles(){
+  const tbody = document.getElementById('owner-veh-tbody');
+  if(!tbody) return;
+  tbody.innerHTML = ownerVehicles.map(v=>{
+    const statusColor = {Available:'badge-green',Rented:'badge-blue',Maintenance:'badge-yellow'}[v.status]||'badge-gray';
+    return `<tr>
+      <td><div class="td-vehicle">
+        <div class="td-vehicle-img"><img src="${v.img}" alt=""/></div>
+        <div><div class="td-vehicle-name">${v.name}</div><div class="td-vehicle-id">${v.regNum}</div></div>
+      </div></td>
+      <td><span class="badge ${statusColor}">${v.status}</span></td>
+      <td><span class="badge badge-gray">${v.cat}</span></td>
+      <td style="font-weight:700;color:var(--blue)">$${v.price}/day</td>
+      <td>${v.loc}</td>
+      <td><div style="display:flex;align-items:center;gap:3px;font-size:.82rem;font-weight:600"><svg width="11" height="11" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>${v.rating}</div></td>
+      <td>${v.bookings} trips</td>
+      <td>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-outline btn-sm" onclick="openEditVehicle(${v.id})">Edit</button>
+          <button class="btn btn-${v.status==='Available'?'ghost':'success'} btn-sm" onclick="toggleVehicleStatus(${v.id})">${v.status==='Available'?'Set Unavailable':'Set Available'}</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteOwnerVehicle(${v.id})">Remove</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function toggleVehicleStatus(id){
+  const v = ownerVehicles.find(x=>x.id===id);
+  if(!v) return;
+  if(v.status==='Available') v.status='Maintenance';
+  else if(v.status==='Maintenance') v.status='Available';
+  renderOwnerVehicles();
+  toast(`${v.name} status updated to ${v.status}`, 'success');
+}
+
+function deleteOwnerVehicle(id){
+  if(!confirm('Remove this vehicle listing? This cannot be undone.')) return;
+  ownerVehicles = ownerVehicles.filter(v=>v.id!==id);
+  renderOwnerVehicles();
+  document.getElementById('ov-count').textContent = ownerVehicles.length;
+  toast('Vehicle listing removed','info');
+}
+
+function openEditVehicle(id){
+  const v = ownerVehicles.find(x=>x.id===id);
+  if(!v) return;
+  document.getElementById('av-modal-title').textContent = 'Edit Vehicle';
+  document.getElementById('av-name').value = v.name;
+  document.getElementById('av-cat').value = v.cat;
+  document.getElementById('av-year').value = v.year;
+  document.getElementById('av-seats').value = v.seats;
+  document.getElementById('av-trans').value = v.trans;
+  document.getElementById('av-fuel').value = v.fuel;
+  document.getElementById('av-price').value = v.price;
+  document.getElementById('av-loc').value = v.loc;
+  document.getElementById('av-reg').value = v.regNum;
+  document.getElementById('av-modal').classList.remove('hidden');
+  document.getElementById('av-modal')._editId = id;
+}
+
+/* ════ RENDER: BOOKING REQUESTS ════ */
+function renderBookingRequests(){
+  const container = document.getElementById('booking-req-list');
+  if(!container) return;
+  const pending = bookingRequests.filter(b=>b.status==='Pending');
+  const others = bookingRequests.filter(b=>b.status!=='Pending');
+  container.innerHTML = [...pending,...others].map(b=>{
+    const sc = {Pending:'badge-yellow',Confirmed:'badge-green',Completed:'badge-blue',Cancelled:'badge-red'}[b.status]||'badge-gray';
+    const isPending = b.status==='Pending';
+    return `<div class="dash-panel" style="margin-bottom:12px">
+      <div style="display:flex;align-items:flex-start;gap:16px">
+        <div class="td-vehicle-img" style="width:80px;height:60px;flex-shrink:0;border-radius:10px;overflow:hidden;background:var(--slate-l)">
+          <img src="${VEHICLES.find(v=>v.name===b.vehicle)?.img||''}" style="width:100%;height:100%;object-fit:cover" alt=""/>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+            <span style="font-weight:700;color:var(--blue);font-size:.82rem">#${b.id}</span>
+            <span class="badge ${sc}">${b.status}</span>
+            ${isPending?'<span class="badge badge-red" style="animation:pulse 2s infinite">New</span>':''}
+          </div>
+          <div style="font-weight:700;font-size:.92rem;margin-bottom:4px">${b.vehicle}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;font-size:.78rem;color:var(--text-3)">
+            <span>👤 <strong style="color:var(--text-2)">${b.customer}</strong></span>
+            <span>📅 ${b.pickup} → ${b.ret} (${b.days} days)</span>
+            <span>📍 ${b.loc}</span>
+            <span>📞 ${b.phone}</span>
+            <span style="font-weight:700;color:var(--blue);font-size:.85rem">💰 $${b.total}</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
+          ${isPending?`
+            <button class="btn btn-success btn-sm" onclick="handleBooking('${b.id}','Confirmed')">✓ Accept</button>
+            <button class="btn btn-danger btn-sm" onclick="handleBooking('${b.id}','Rejected')">✕ Reject</button>
+          `:`<button class="btn btn-ghost btn-sm" onclick="toast('Booking #${b.id} details','info')">View Details</button>`}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  // Update pending badge
+  const pendingCount = pending.length;
+  document.querySelectorAll('#page-owner .nav-link-badge').forEach((el,i)=>{ if(i===1) el.textContent = pendingCount; });
+}
+
+function handleBooking(id, action){
+  const b = bookingRequests.find(x=>x.id===id);
+  if(!b) return;
+  b.status = action;
+  renderBookingRequests();
+  toast(`Booking #${id} ${action}!`, action==='Confirmed'?'success':'info');
+  if(action==='Confirmed'){
+    activeRentals.push({id,customer:b.customer,vehicle:b.vehicle,img:VEHICLES.find(v=>v.name===b.vehicle)?.img||'',start:b.pickup,end:b.ret,avatar:b.avatar,daysLeft:b.days,handedOver:false});
+  }
+}
+
+/* ════ RENDER: ACTIVE RENTALS ════ */
+function renderActiveRentals(){
+  const container = document.getElementById('active-rentals-list');
+  if(!container) return;
+  if(activeRentals.length===0){container.innerHTML='<div style="text-align:center;padding:40px;color:var(--text-4)">No active rentals right now</div>';return;}
+  container.innerHTML = activeRentals.map(r=>`
+    <div class="dash-panel" style="margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:16px">
+        <div style="width:80px;height:60px;border-radius:10px;overflow:hidden;flex-shrink:0;background:var(--slate-l)">
+          <img src="${r.img}" style="width:100%;height:100%;object-fit:cover" alt=""/>
+        </div>
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:.92rem;margin-bottom:3px">${r.vehicle}</div>
+          <div style="font-size:.78rem;color:var(--text-3);display:flex;gap:12px;flex-wrap:wrap">
+            <span>👤 ${r.customer}</span>
+            <span>📅 ${r.start} → ${r.end}</span>
+            <span style="color:${r.daysLeft<=1?'var(--red)':'var(--text-3)'};font-weight:600">⏱ ${r.daysLeft} day(s) remaining</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+          <span class="badge ${r.handedOver?'badge-blue':'badge-yellow'}">${r.handedOver?'Vehicle Handed Over':'Awaiting Handover'}</span>
+          <div style="display:flex;gap:6px">
+            ${!r.handedOver?`<button class="btn btn-success btn-sm" onclick="markHandover('${r.id}')">Mark as Handed Over</button>`:''}
+            <button class="btn btn-primary btn-sm" onclick="markReturned('${r.id}')">Mark Returned</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function markHandover(id){
+  const r = activeRentals.find(x=>x.id===id);
+  if(r){ r.handedOver=true; renderActiveRentals(); toast('Vehicle handed over to customer!','success'); }
+}
+
+function markReturned(id){
+  activeRentals = activeRentals.filter(x=>x.id!==id);
+  renderActiveRentals();
+  toast('Vehicle marked as returned! Rental completed.','success');
+}
+
+/* ════ RENDER: EARNINGS ════ */
+function renderEarnings(){
+  const tbody = document.getElementById('earnings-tbody');
+  if(!tbody) return;
+  tbody.innerHTML = ownerVehicles.map(v=>`
+    <tr>
+      <td><div class="td-vehicle"><div class="td-vehicle-img"><img src="${v.img}" alt=""/></div><div><div class="td-vehicle-name">${v.name}</div><div class="td-vehicle-id">${v.cat}</div></div></div></td>
+      <td style="font-weight:700">${v.bookings}</td>
+      <td style="font-weight:700;color:var(--green)">$${v.earnings.toLocaleString()}</td>
+      <td>$${v.price}/day</td>
+      <td><span class="badge ${v.status==='Available'?'badge-green':v.status==='Rented'?'badge-blue':'badge-yellow'}">${v.status}</span></td>
+    </tr>
+  `).join('');
+}
+
+/* ════ RENDER: OWNER REVIEWS ════ */
+const ownerReviewsData = [
+  {customer:'John Doe',vehicle:'Toyota Avanza',date:'Nov 20, 2025',rating:5,avatar:'JD',col:'var(--blue)',text:'Excellent car! Very clean and well-maintained. Ahmad was super helpful and responsive. Definitely renting again!'},
+  {customer:'Siti Rahayu',vehicle:'Honda Jazz',date:'Nov 15, 2025',rating:4,avatar:'SR',col:'var(--green)',text:'Great car, smooth drive. Easy pickup process. Would recommend to friends.'},
+  {customer:'Budi Santoso',vehicle:'Toyota Fortuner',date:'Nov 10, 2025',rating:5,avatar:'BS',col:'var(--purple)',text:'Amazing SUV! Perfect for our family trip. Owner was very professional.'},
+];
+
+function renderOwnerReviews(){
+  const container = document.getElementById('owner-reviews-list');
+  if(!container) return;
+  container.innerHTML = ownerReviewsData.map(r=>`
+    <div class="dash-panel" style="margin-bottom:12px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:38px;height:38px;border-radius:50%;background:${r.col};color:#fff;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center">${r.avatar}</div>
+          <div>
+            <div style="font-weight:700;font-size:.85rem">${r.customer}</div>
+            <div style="font-size:.72rem;color:var(--text-4)">${r.date} · ${r.vehicle}</div>
+          </div>
+        </div>
+        <div class="stars" style="color:#f59e0b">${'<svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'.repeat(r.rating)}</div>
+      </div>
+      <div style="font-size:.82rem;color:var(--text-2);line-height:1.6;margin-bottom:10px">${r.text}</div>
+      <button class="btn btn-ghost btn-sm" onclick="toast('Reply sent!','success')">Reply to Review</button>
+    </div>
+  `).join('');
+}
+
+/* ════ ADD VEHICLE MODAL ════ */
+function openAddVehicleModal(){
+  document.getElementById('av-modal-title').textContent = 'Add New Vehicle';
+  document.getElementById('av-form').reset();
+  document.getElementById('av-modal')._editId = null;
+  document.getElementById('av-modal').classList.remove('hidden');
+}
+
+function closeAddVehicleModal(){
+  document.getElementById('av-modal').classList.add('hidden');
+}
+
+function submitVehicle(){
+  const name = document.getElementById('av-name').value.trim();
+  const cat  = document.getElementById('av-cat').value;
+  const year = +document.getElementById('av-year').value;
+  const seats= +document.getElementById('av-seats').value;
+  const trans= document.getElementById('av-trans').value;
+  const fuel = document.getElementById('av-fuel').value;
+  const price= +document.getElementById('av-price').value;
+  const loc  = document.getElementById('av-loc').value.trim();
+  const reg  = document.getElementById('av-reg').value.trim();
+  if(!name||!cat||!year||!seats||!price||!loc||!reg){
+    toast('Please fill in all required fields','error'); return;
+  }
+  const editId = document.getElementById('av-modal')._editId;
+  if(editId){
+    const v = ownerVehicles.find(x=>x.id===editId);
+    if(v){ Object.assign(v,{name,cat,year,seats,trans,fuel,price,loc,regNum:reg}); }
+    toast(`${name} updated successfully!`,'success');
+  } else {
+    const newId = Math.max(...ownerVehicles.map(v=>v.id))+1;
+    ownerVehicles.push({id:newId,name,cat,year,seats,trans,fuel,price,loc,regNum:reg,status:'Available',img:'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=300&q=80&fit=crop',rating:0,bookings:0,earnings:0});
+    document.getElementById('ov-count').textContent = ownerVehicles.length;
+    toast(`${name} added to your listings!`,'success');
+  }
+  closeAddVehicleModal();
+  renderOwnerVehicles();
+}
+
+/* ════ OWNER REGISTRATION ════ */
+function openOwnerRegister(){
+  document.getElementById('modal-overlay').classList.remove('hidden');
+  document.getElementById('form-login').classList.add('hidden');
+  document.getElementById('form-register').classList.add('hidden');
+  document.getElementById('form-owner-register').classList.remove('hidden');
+  document.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active'));
+}
+
+function closeOwnerRegisterForm(){
+  document.getElementById('form-owner-register').classList.add('hidden');
+  document.getElementById('form-login').classList.remove('hidden');
+  switchTab('login');
+}
+
+function submitOwnerRegistration(){
+  const name = document.getElementById('or-name').value.trim();
+  const email = document.getElementById('or-email').value.trim();
+  const biz = document.getElementById('or-business').value.trim();
+  if(!name||!email||!biz){ toast('Please fill all required fields','error'); return; }
+  loginAs('owner');
+  toast(`Welcome ${name}! Owner account created.`,'success');
+}
 
 /* Initial render */
 renderHomeVehicles();
