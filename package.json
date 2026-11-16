@@ -1,13 +1,13 @@
 {
   "name": "rentease-api",
   "version": "1.0.0",
-  "description": "RentEase - Vehicle Rental Marketplace REST API | Midterm Project | Rahumathulla Misfar Mohammed - 2005342004231",
+  "description": "RentEase - Vehicle Rental Marketplace REST API | Midterm Project | Rahumathulla Misfar Mohammed - 20250040208",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "author": "Rahumathulla Misfar Mohammed - 2005342004231",
+  "author": "Rahumathulla Misfar Mohammed - 20250040208",
   "license": "ISC",
   "dependencies": {
     "express": "^5.1.0",

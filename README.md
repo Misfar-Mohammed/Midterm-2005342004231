@@ -7,7 +7,7 @@
 | Field | Value |
 |-------|-------|
 | **Name** | Rahumathulla Misfar Mohammed |
-| **NIM** | 2005342004231 |
+| **NIM** | 20250040208 |
 | **Theme** | Vehicle Rental Marketplace |
 | **Main Resource** | `/vehicles` |
 | **Bonus Resource** | `/owners` (+5 pts) |

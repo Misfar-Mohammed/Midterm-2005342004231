@@ -41,7 +41,7 @@ app.get("/", (req, res) => {
     message: "Welcome to RentEase API 🚗",
     tagline: "Your Journey, Your Choice.",
     author: "Rahumathulla Misfar Mohammed",
-    nim: "2005342004231",
+    nim: "20250040208",
     theme: "Vehicle Rental Marketplace",
     endpoints: {
       vehicles: `${base}/vehicles`,
