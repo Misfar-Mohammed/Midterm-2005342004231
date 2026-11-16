@@ -118,6 +118,12 @@ input,select,textarea,button{font-family:inherit}
 .hero-stat-lbl{font-size:.74rem;color:rgba(255,255,255,.68);margin-top:6px}
 .hero-div{width:1px;height:34px;background:rgba(255,255,255,.28)}
 .hero-img{display:none}
+/* Fast moving car accent */
+.hero-car-pass{position:absolute;z-index:2;left:0;bottom:22px;width:clamp(190px,24vw,330px);pointer-events:none;filter:drop-shadow(0 12px 18px rgba(0,0,0,.5));animation:heroCarDrive 5.8s linear infinite;will-change:transform}
+.hero-car-pass svg{display:block;width:100%;height:auto;overflow:visible}
+.hero-car-pass .speed-lines{stroke:rgba(173,220,255,.8);stroke-width:3;stroke-linecap:round;fill:none}
+@keyframes heroCarDrive{0%{transform:translateX(110vw) translateY(0) scale(1);opacity:0}8%{opacity:1}42%{transform:translateX(38vw) translateY(-5px) scale(1.04);opacity:1}58%{transform:translateX(5vw) translateY(0) scale(1);opacity:1}72%{transform:translateX(-40vw) translateY(3px) scale(.92);opacity:0}100%{transform:translateX(-40vw) translateY(3px) scale(.92);opacity:0}}
+@media(prefers-reduced-motion:reduce){.hero-car-pass{animation:none;opacity:.8;left:auto;right:4%;width:210px}}
 .search-wrap{margin-top:-62px;max-width:1240px}
 .search-box{border-radius:18px;padding:24px 26px;box-shadow:0 24px 65px rgba(15,23,42,.2)}
 @media(max-width:760px){.hero{min-height:600px;padding:65px 22px 110px}.hero-inner{align-items:flex-start}.hero-text{padding-top:12px}.hero-h1{font-size:3.2rem}.hero-sub{font-size:.95rem}.hero-stats{gap:14px}.hero-stat-num{font-size:1.15rem}.hero-stat-lbl{font-size:.66rem}.search-wrap{padding:0 14px;margin-top:-72px}.search-box{padding:18px}.search-fields{grid-template-columns:1fr 1fr}.search-fields>div:first-child{grid-column:1/-1}.btn-search{width:100%;justify-content:center}.hero-cta{margin-bottom:32px}}
@@ -437,6 +443,20 @@ input,select,textarea,button{font-family:inherit}
     <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1800&q=85">
       <source src="https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_25fps.mp4" type="video/mp4"/>
     </video>
+    <div class="hero-car-pass" aria-hidden="true">
+      <svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg">
+        <path class="speed-lines" d="M12 92H105M0 108H76M42 76H112"/>
+        <path d="M105 91L139 55Q151 39 181 36L270 36Q292 37 312 57L348 72 382 83Q397 89 399 105L395 119H90L91 104Q94 94 105 91Z" fill="#dcecff" stroke="#fff" stroke-width="3"/>
+        <path d="M155 56Q164 44 185 43H267Q285 44 300 62L316 76H132Z" fill="#16324f" stroke="#9bcfff" stroke-width="2"/>
+        <path d="M222 45V75M282 47L301 75" stroke="#6fa9d8" stroke-width="2"/>
+        <path d="M98 92H391L397 105H91Z" fill="#2463a6"/>
+        <path d="M102 91H125M365 91H393" stroke="#f7fbff" stroke-width="5" stroke-linecap="round"/>
+        <path d="M100 112H394" stroke="#10243b" stroke-width="6"/>
+        <circle cx="151" cy="116" r="22" fill="#0b1524" stroke="#a9c8e6" stroke-width="5"/><circle cx="151" cy="116" r="9" fill="#718ca8"/>
+        <circle cx="337" cy="116" r="22" fill="#0b1524" stroke="#a9c8e6" stroke-width="5"/><circle cx="337" cy="116" r="9" fill="#718ca8"/>
+        <path d="M377 86L396 91" stroke="#fff4cf" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </div>
     <div class="hero-inner">
       <div class="hero-text">
         <div class="hero-tag">✦ YOUR RIDE. YOUR WAY. ✦ &nbsp; INDONESIA</div>
