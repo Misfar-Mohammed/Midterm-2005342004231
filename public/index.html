@@ -412,7 +412,7 @@ input,select,textarea,button{font-family:inherit}
         <div class="notif-footer" onclick="toggleNotif()">View all →</div>
       </div>
     </div>
-    <div class="nav-avatar" id="nav-av" onclick="cycleRole()" title="Click to switch role (demo)">JD</div>
+    <div class="nav-avatar" id="nav-av" title="Logged-in account">JD</div>
   </div>
 </nav>
 
@@ -659,12 +659,12 @@ input,select,textarea,button{font-family:inherit}
         <div class="dnl" onclick="goPage('vehicles')"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Browse Vehicles</div>
         <div class="dnl" onclick="logout()"><svg viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Logout</div>
       </div>
-      <div class="dash-sfu"><div class="sfu-wrap"><div class="sfu-av">JD</div><div><div class="sfu-name">John Doe</div><div class="sfu-role">Customer</div></div></div></div>
+      <div class="dash-sfu"><div class="sfu-wrap"><div class="sfu-av" id="cust-sb-av">JD</div><div><div class="sfu-name" id="cust-sb-name">John Doe</div><div class="sfu-role">Customer</div></div></div></div>
     </aside>
     <div class="dash-content">
       <!-- Overview -->
       <div class="panel active" id="cp-overview">
-        <div class="dash-title">Customer Dashboard</div><div class="dash-sub">Welcome back, John! Here's your rental overview.</div>
+        <div class="dash-title">Customer Dashboard</div><div class="dash-sub" id="cust-welcome">Welcome back, John! Here's your rental overview.</div>
         <div class="stats-row">
           <div class="stat-card"><div class="si si-blue"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><div><div class="stat-num">3</div><div class="stat-lbl">Total Bookings</div></div></div>
           <div class="stat-card"><div class="si si-yellow"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div><div class="stat-num">4.8</div><div class="stat-lbl">My Rating</div></div></div>
@@ -1006,11 +1006,8 @@ input,select,textarea,button{font-family:inherit}
         <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="l-email" type="email" placeholder="your@email.com"/></div>
         <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="l-pass" type="password" placeholder="Your password"/></div>
         <div style="text-align:right"><span style="font-size:.78rem;color:var(--blue);cursor:pointer">Forgot password?</span></div>
-        <button class="btn btn-primary btn-block btn-lg" onclick="doLogin('customer')">Login as Customer</button>
-        <div class="m-grid2">
-          <button class="btn btn-outline btn-block" onclick="doLogin('owner')">Owner Login</button>
-          <button class="btn btn-ghost btn-block" onclick="doLogin('admin')">Admin Login</button>
-        </div>
+        <button class="btn btn-primary btn-block btn-lg" onclick="doLogin()">Login</button>
+        <div style="text-align:center;font-size:.74rem;color:var(--text-3)">Your account type (Customer or Owner) will be detected automatically after login.<br/>Admin demo: admin@rentease.com / admin123</div>
         <div style="text-align:center;font-size:.78rem;color:var(--text-3)">No account? <span style="color:var(--blue);cursor:pointer;font-weight:600" onclick="switchAuthTab('register')">Register →</span></div>
       </div>
     </div>
@@ -1159,6 +1156,12 @@ let avEditId = null;
    PAGE NAVIGATION
 ════════════════════════════════════ */
 function goPage(p){
+  const protectedPages = ['customer','owner','admin'];
+  if(protectedPages.includes(p) && (!isLoggedIn || currentRole !== p)){
+    if(!isLoggedIn) openModal('login');
+    else goPage(currentRole);
+    return;
+  }
   document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
   const pg = document.getElementById('page-'+p);
   if(pg) pg.classList.add('active');
@@ -1367,80 +1370,184 @@ function openOwnerReg(){
   showOwnerRegForm();
 }
 
-/* ════ LOGIN / REGISTER SUBMIT ════ */
-function doLogin(role){
-  const email = document.getElementById('l-email').value.trim();
-  const pass  = document.getElementById('l-pass').value.trim();
-  if(!email){ showToast('Please enter your email','err'); document.getElementById('l-email').focus(); return; }
-  if(!pass){ showToast('Please enter your password','err'); document.getElementById('l-pass').focus(); return; }
-  if(pass.length < 3){ showToast('Invalid password','err'); return; }
-  loginAs(role);
+/* ════ LOGIN / REGISTER SUBMIT ════
+   Demo accounts are saved separately in this browser using localStorage.
+   A real production app must use a backend database and hashed passwords. */
+const USERS_STORAGE_KEY = 'rentease_users_v1';
+const SESSION_STORAGE_KEY = 'rentease_session_v1';
+let currentUser = null;
+
+function getRegisteredUsers(){
+  try {
+    const users = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY) || '[]');
+    return Array.isArray(users) ? users : [];
+  } catch(error) {
+    console.error('Could not read saved accounts:', error);
+    return [];
+  }
 }
 
-function doCustomerReg(){
+function saveRegisteredUsers(users){
+  localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+}
+
+async function hashPassword(password){
+  const bytes = new TextEncoder().encode(password);
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return Array.from(new Uint8Array(digest)).map(byte=>byte.toString(16).padStart(2,'0')).join('');
+}
+
+async function createAccount(account){
+  const users = getRegisteredUsers();
+  const normalizedEmail = account.email.trim().toLowerCase();
+  if(users.some(user => user.email.toLowerCase() === normalizedEmail)){
+    showToast('An account with this email already exists. Please login.','err');
+    return false;
+  }
+  users.push({
+    id: (crypto.randomUUID ? crypto.randomUUID() : 'USR-' + Date.now()),
+    name: account.name.trim(),
+    email: normalizedEmail,
+    passwordHash: await hashPassword(account.password),
+    role: account.role,
+    phone: account.phone || '',
+    business: account.business || '',
+    city: account.city || '',
+    createdAt: new Date().toISOString()
+  });
+  saveRegisteredUsers(users);
+  return true;
+}
+
+function validEmail(email){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+async function doLogin(role){
+  const emailInput = document.getElementById('l-email');
+  const passInput = document.getElementById('l-pass');
+  const email = emailInput.value.trim().toLowerCase();
+  const pass = passInput.value;
+  if(!email){ showToast('Please enter your email','err'); emailInput.focus(); return; }
+  if(!validEmail(email)){ showToast('Please enter a valid email address','err'); emailInput.focus(); return; }
+  if(!pass){ showToast('Please enter your password','err'); passInput.focus(); return; }
+
+  // Demo administrator account. Admin cannot be created through public registration.
+  if(role === 'admin' && email === 'admin@rentease.com' && pass === 'admin123'){
+    loginAs({id:'ADMIN-001',name:'RentEase Admin',email,role:'admin'});
+    return;
+  }
+
+  const users = getRegisteredUsers();
+  const user = users.find(item => item.email.toLowerCase() === email);
+  const passwordMatches = user && (user.passwordHash === await hashPassword(pass) || user.password === pass);
+  if(!user || !passwordMatches || user.role !== role){
+    showToast('Incorrect email, password, or account type. Please check and try again.','err');
+    passInput.focus();
+    return;
+  }
+  // Upgrade accounts created by the earlier demo version to hashed passwords.
+  if(user.password){ user.passwordHash = await hashPassword(user.password); delete user.password; saveRegisteredUsers(users); }
+  loginAs(user);
+}
+
+async function doCustomerReg(){
   const fname = document.getElementById('r-fname').value.trim();
   const lname = document.getElementById('r-lname').value.trim();
-  const email = document.getElementById('r-email').value.trim();
-  const pass  = document.getElementById('r-pass').value.trim();
+  const email = document.getElementById('r-email').value.trim().toLowerCase();
+  const pass = document.getElementById('r-pass').value;
   if(!fname){ showToast('Please enter your first name','err'); document.getElementById('r-fname').focus(); return; }
-  if(!email){ showToast('Please enter your email','err'); document.getElementById('r-email').focus(); return; }
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showToast('Please enter a valid email address','err'); document.getElementById('r-email').focus(); return; }
+  if(!email || !validEmail(email)){ showToast('Please enter a valid email address','err'); document.getElementById('r-email').focus(); return; }
   if(pass.length < 6){ showToast('Password must be at least 6 characters','err'); document.getElementById('r-pass').focus(); return; }
-  const fullName = (fname+' '+(lname||'')).trim();
-  loginAs('customer', fullName);
-  showToast(`Welcome ${fullName}! Account created successfully.`,'ok');
+
+  const fullName = (fname + ' ' + lname).trim();
+  if(!await createAccount({name:fullName,email,password:pass,role:'customer'})) return;
+  const user = getRegisteredUsers().find(item => item.email === email);
+  loginAs(user);
+  showToast('Customer account created successfully.','ok');
 }
 
-function doOwnerReg(){
-  const name  = document.getElementById('o-name').value.trim();
-  const email = document.getElementById('o-email').value.trim();
+async function doOwnerReg(){
+  const name = document.getElementById('o-name').value.trim();
+  const email = document.getElementById('o-email').value.trim().toLowerCase();
   const phone = document.getElementById('o-phone').value.trim();
-  const biz   = document.getElementById('o-biz').value.trim();
-  const city  = document.getElementById('o-city').value;
-  const pass  = document.getElementById('o-pass').value.trim();
+  const biz = document.getElementById('o-biz').value.trim();
+  const city = document.getElementById('o-city').value;
+  const pass = document.getElementById('o-pass').value;
   if(!name){ showToast('Please enter your full name','err'); document.getElementById('o-name').focus(); return; }
-  if(!email){ showToast('Please enter your email','err'); document.getElementById('o-email').focus(); return; }
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showToast('Please enter a valid email address','err'); document.getElementById('o-email').focus(); return; }
+  if(!email || !validEmail(email)){ showToast('Please enter a valid email address','err'); document.getElementById('o-email').focus(); return; }
   if(!phone){ showToast('Please enter your phone number','err'); document.getElementById('o-phone').focus(); return; }
   if(!biz){ showToast('Please enter your business name','err'); document.getElementById('o-biz').focus(); return; }
   if(!city){ showToast('Please select your city','err'); document.getElementById('o-city').focus(); return; }
   if(pass.length < 6){ showToast('Password must be at least 6 characters','err'); document.getElementById('o-pass').focus(); return; }
-  loginAs('owner', name);
-  showToast(`Welcome ${name}! Owner account created.`,'ok');
+
+  if(!await createAccount({name,email,password:pass,role:'owner',phone,business:biz,city})) return;
+  const user = getRegisteredUsers().find(item => item.email === email);
+  loginAs(user);
+  showToast('Vehicle owner account created successfully.','ok');
 }
 
-function loginAs(role, displayName){
+function loginAs(user, showMessage = true){
+  if(!user || !['customer','owner','admin'].includes(user.role)) return;
+  currentUser = user;
   isLoggedIn = true;
-  currentRole = role;
+  currentRole = user.role;
+  localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify({id:user.id,email:user.email,role:user.role}));
   closeAuthModal();
   document.getElementById('nav-guest').classList.add('d-none');
   document.getElementById('nav-user').classList.remove('d-none');
-  // Set avatar initials from displayName or defaults
-  let avText;
-  if(displayName){
-    avText = displayName.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  } else {
-    avText = {customer:'JD',owner:'AR',admin:'AD'}[role]||'U';
+
+  const initials = user.name.split(/\s+/).filter(Boolean).map(word=>word[0]).join('').slice(0,2).toUpperCase() || 'U';
+  document.getElementById('nav-av').textContent = initials;
+  document.getElementById('nav-av').removeAttribute('onclick');
+
+  const dashboard = document.getElementById('page-' + user.role);
+  const sidebarName = dashboard && dashboard.querySelector('.sfu-name');
+  const sidebarAvatar = dashboard && dashboard.querySelector('.sfu-av');
+  if(sidebarName) sidebarName.textContent = user.name;
+  if(sidebarAvatar) sidebarAvatar.textContent = initials;
+
+  if(user.role === 'customer'){
+    const avatar = document.getElementById('cust-sb-av');
+    const name = document.getElementById('cust-sb-name');
+    const welcome = document.getElementById('cust-welcome');
+    if(avatar) avatar.textContent = initials;
+    if(name) name.textContent = user.name;
+    if(welcome) welcome.textContent = 'Welcome back, ' + user.name + '! Here is your rental overview.';
   }
-  document.getElementById('nav-av').textContent = avText;
   const pages = {customer:'customer',owner:'owner',admin:'admin'};
-  goPage(pages[role]);
-  showToast(`Logged in as ${role.charAt(0).toUpperCase()+role.slice(1)}!`,'ok');
+  goPage(pages[user.role]);
+  if(showMessage) showToast('Welcome, ' + user.name + '!','ok');
+}
+
+function restoreLoginSession(){
+  try {
+    const saved = JSON.parse(localStorage.getItem(SESSION_STORAGE_KEY) || 'null');
+    if(!saved) return;
+    let user = null;
+    if(saved.role === 'admin' && saved.email === 'admin@rentease.com'){
+      user = {id:'ADMIN-001',name:'RentEase Admin',email:saved.email,role:'admin'};
+    } else {
+      user = getRegisteredUsers().find(item => item.id === saved.id && item.email === saved.email && item.role === saved.role);
+    }
+    if(user) loginAs(user,false);
+    else localStorage.removeItem(SESSION_STORAGE_KEY);
+  } catch(error) {
+    console.error('Could not restore login session:', error);
+    localStorage.removeItem(SESSION_STORAGE_KEY);
+  }
 }
 
 function logout(){
   isLoggedIn = false;
+  currentUser = null;
+  currentRole = 'customer';
+  localStorage.removeItem(SESSION_STORAGE_KEY);
   document.getElementById('nav-guest').classList.remove('d-none');
   document.getElementById('nav-user').classList.add('d-none');
+  document.getElementById('nav-av').setAttribute('onclick','');
   goPage('home');
   showToast('Logged out successfully','info');
-}
-
-function cycleRole(){
-  if(!isLoggedIn) return;
-  const roles = ['customer','owner','admin'];
-  const next = roles[(roles.indexOf(currentRole)+1)%3];
-  loginAs(next);
 }
 
 /* ════════════════════════════════════
@@ -1772,11 +1879,6 @@ function showToast(msg, type='info'){
    KEYBOARD SHORTCUTS
 ════════════════════════════════════ */
 document.addEventListener('keydown', e=>{
-  if(e.ctrlKey && e.shiftKey){
-    if(e.key==='A'){ e.preventDefault(); loginAs('admin'); }
-    else if(e.key==='O'){ e.preventDefault(); loginAs('owner'); }
-    else if(e.key==='C'){ e.preventDefault(); loginAs('customer'); }
-  }
   if(e.key==='Escape') closeAuthModal();
 });
 
@@ -1791,6 +1893,7 @@ document.addEventListener('keydown', e=>{
   ['hs-r','b-return'].forEach(id=>{ const el=document.getElementById(id); if(el){el.value=fmt(tom);el.min=fmt(tom);} });
   renderHomeGrid();
   renderVehGrid(VEHICLES);
+  restoreLoginSession();
 })();
 </script>
 </body>
